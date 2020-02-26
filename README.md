@@ -17,5 +17,5 @@ This is the repository of group 9 in course CMPE352 Fundamentals of Software Eng
 - [Halil İbrahim Orhan](https://github.com/bounswe/bounswe2020group9/wiki/Halil-İbrahim-Orhan)
 - [Emine Alcan Unsal](https://github.com/bounswe/bounswe2020group9/wiki/Emine-Alcan-Unsal)
 - [Mehmet Berk Kemaloğlu](https://github.com/bounswe/bounswe2020group9/wiki/Mehmet-Berk-Kemalo%C4%9Flu)
-- FIRAT BULUT
+- Fırat Bulut
 
