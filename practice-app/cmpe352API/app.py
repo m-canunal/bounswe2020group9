@@ -71,7 +71,7 @@ def nasaApod():
 @app.route("/apodJson")
 def nasaApodJson():
     params={
-        "api_key":"FbSD5I112W6dykCrvlhXTSKVDpcbY35W4mxFTPCS"
+        "api_key":"DEMO_KEY"
     }
     response = requests.get(
         "https://api.nasa.gov/planetary/apod",
