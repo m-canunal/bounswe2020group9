@@ -73,7 +73,7 @@ def api_remove():
         del favorites["list"][request.json[0]]
     except KeyError:
         print(request.json)
-        return jsonify({"Error: Key not found":{"Possible solutions":[
+        return jsonify({"Error: Key not found": {"Possible solutions": [
             "Make sure you've typed the id as json such that `<json>[0] = id`",
             "Make sure the id you've entered is valid and available"
         ]}})
@@ -182,10 +182,13 @@ def nasaApodJsonDate(date):
 def salih():
     return "SALIH"
 
+
 # Below is the error handlers
 @app.errorhandler(404)
 def notFound(error):
     return make_response(jsonify({"404": "not found"}), 404)
+
+
 # Above is error handlers
 
 # Below is main
