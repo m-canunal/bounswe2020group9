@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, make_response, abort, request
 import requests
 import os
+import datetime
 
 app = Flask(__name__)
 
@@ -15,6 +16,8 @@ nasaFav = [
     {}
 ]
 
+time = datetime.datetime.now()
+date = str(time.year)+"-"+str(time.month)+"-"+str(time.day)
 
 @app.route("/")
 def mainMenu():
@@ -47,15 +50,39 @@ def mainMenu():
 @app.route("/hello")
 def helloWorld():
     return "Hello World!"
+
+@app.route("/news")
+def get_news():
+    params = {
+        "q": "Covid",
+        "country": "us",
+        "from": "2020-05-19",
+        "sortBy": "popularity",
+        "apiKey": "64508aee042e414b93c1d5b047904c04"
+    }
+    response = requests.get(
+        "http://newsapi.org/v2/top-headlines?",
+        params=params
+    )
+
+    x = response.json()
+    print (x)
+    return x
+
+
 @app.route("/tasks/view", methods=["GET"])
 def get_tasks():
  return jsonify({"things-to-do": ttd})
+
+
 @app.route("/tasks/view/<int:task_id>", methods=["GET"])
 def get_task(task_id):
     task = [task for task in ttd if task["id"] == task_id]
     if len(task) == 0:
         abort(404)
     return jsonify({"task":task[0]})
+
+
 @app.route("/tasks/create", methods=["POST"])
 def create_tasks():
     if not request.json or not "task" in request.json:
@@ -70,7 +97,7 @@ def nasaApod():
 @app.route("/apodJson")
 def nasaApodJson():
     params={
-        "api_key":"DEMO_KEY"
+        "api_key":"FbSD5I112W6dykCrvlhXTSKVDpcbY35W4mxFTPCS"
     }
     response = requests.get(
         "https://api.nasa.gov/planetary/apod",
