@@ -15,7 +15,7 @@ ttd = [
 ]
 
 # Below used in "/api"
-customFav = {"0": ["first"], "1": ["second"], "2": ["third"], "3": ["fourth"], "4": ["fifth"], "5": ["sixth"]}
+customFav = {0: ["first"], 1: ["second"], 2: ["third"], 3: ["fourth"], 4: ["fifth"], 5: ["sixth"]}
 favorites = {"counter": len(customFav), "list": customFav}
 # Above used in "/api"
 
@@ -64,6 +64,8 @@ def api_add():
     favorites["list"][id] = request.json
     # counter only increments, ids will always be unique
     favorites["counter"] += 1
+    type(favorites["list"])
+    print(favorites["list"])
     return jsonify({"POST succesful": favorites["list"]})
 
 
