@@ -17,6 +17,11 @@ ttd = [
 # Below used in "/api"
 customFav = {0: ["first"], 1: ["second"], 2: ["third"], 3: ["fourth"], 4: ["fifth"], 5: ["sixth"]}
 favorites = {"counter": len(customFav), "list": customFav}
+def getFreeID():
+    key = 0
+    while key in dict.keys(favorites["list"]):
+        key+=1
+    return key
 # Above used in "/api"
 
 time = datetime.datetime.now()
@@ -60,10 +65,7 @@ def api_list():
 
 @app.route("/api/add", methods=["POST"])
 def api_add():
-    id = favorites["counter"]
-    favorites["list"][id] = request.json
-    # counter only increments, ids will always be unique
-    favorites["counter"] += 1
+    favorites["list"][getFreeID()] = request.json
     type(favorites["list"])
     print(favorites["list"])
     return jsonify({"POST succesful": favorites["list"]})
