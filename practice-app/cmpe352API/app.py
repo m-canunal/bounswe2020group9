@@ -16,7 +16,6 @@ nasaFav = [
 ]
 
 
-
 @app.route("/")
 def mainMenu():
     return jsonify({"routes":{
