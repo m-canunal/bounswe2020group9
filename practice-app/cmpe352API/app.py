@@ -26,6 +26,7 @@ def getFreeID():
 
 time = datetime.datetime.now()
 date = str(time.year) + "-" + str(time.month) + "-" + str(time.day)
+maxdate = str(time.year) + "-" + str(time.month-1) + "-" + str(time.day)
 
 
 @app.route("/")
@@ -93,10 +94,11 @@ def helloWorld():
 
 @app.route("/news")
 def get_news():
+    parameters = request.json
     params = {
-        "q": "Covid",
-        "country": "us",
-        "from": "2020-05-19",
+        "q": parameters["topic"],
+        "country": parameters["country"],
+        "from": maxdate,
         "sortBy": "popularity",
         "apiKey": "64508aee042e414b93c1d5b047904c04"
     }
@@ -106,6 +108,25 @@ def get_news():
     )
 
     x = response.json()
+    print(x)
+    return x
+
+@app.route("/newsNasa")
+def get_nasa_news():
+    nasa = nasaApodJson().json
+    params = {
+        "q": nasa["copyright"],
+        "language": "en",
+        "from": maxdate,
+        "sortBy": "popularity",
+        "apiKey": "64508aee042e414b93c1d5b047904c04"
+    }
+    response = requests.get(
+        "http://newsapi.org/v2/everything?",
+        params=params
+    )
+    x = response.json()
+    print (nasa["title"])
     print(x)
     return x
 
