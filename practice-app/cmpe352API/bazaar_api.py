@@ -10,6 +10,7 @@ import api_calls, utils
 
 # bazaar_api.py:
 # This page includes the necessary functions of the API we submit
+# All return types should be dictionary
 
 
 # Things that will be hold in  app.get_api()
@@ -35,8 +36,8 @@ def favorites_delete(id):
     try:
         del favorites[id]
     except KeyError:
-        return jsonify({"Error: Key not found": {"Possible solutions": [
+        return {"Error: Key not found": {"Possible solutions": [
             "Make sure you've typed the id as json such that `<json>[0] = id`",
             "Make sure the id you've entered is valid and available"
-        ]}})
+        ]}}
     return {"DELETE succesful": favorites}

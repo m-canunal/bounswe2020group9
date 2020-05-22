@@ -57,9 +57,9 @@ def api_news():
     return jsonify(api_calls.get_news(utils.getTodayString()))
 
 # Return the fetched APOD json, day: <string:date>
-@app.route("/api/apod/<string:date>", methods=["GET"])
+@app.route("/api/apod/<string:date>")
 def api_apod(date):
-    return api_calls.get_nasa_apod(date)
+    return jsonify(api_calls.get_nasa_apod(date))
 
 # Return the fetched APOD json, day: <Today>
 @app.route("/api/apod")
@@ -70,7 +70,7 @@ def api_apod_today():
 # View the Astronomy Picture of the Day: <string:date>
 @app.route("/apod/<string:date>")
 def apod(date):
-    apodJson = api_apod(date).json
+    apodJson = api_calls.get_nasa_apod(date)
     if "400, bad request" in apodJson:
         return jsonify(apodJson)
     url = apodJson["url"]
@@ -83,7 +83,7 @@ def apod(date):
 def apod_today():
     apodJson = api_calls.get_nasa_apod(utils.getTodayString())
     if "hdurl" in apodJson:
-        return render_template("apod.html", url=apodJson["hdurl"])
+        url = apodJson["hdurl"]
     return render_template("apod.html", url=apodJson["url"])
 
 
