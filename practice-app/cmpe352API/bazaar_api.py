@@ -33,7 +33,7 @@ def favorites_post(input):
 
 def favorites_delete(id):
     try:
-        del favorites["list"][id]
+        del favorites[id]
     except KeyError:
         return jsonify({"Error: Key not found": {"Possible solutions": [
             "Make sure you've typed the id as json such that `<json>[0] = id`",

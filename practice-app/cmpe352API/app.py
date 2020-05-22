@@ -43,13 +43,13 @@ def api_favorites():
 @app.route("/api/favorites/add", methods=["POST"])
 def api_favorites_post():
     # request.json is the json object user has given to us
-    return bazaar_api.favorites_post(request.json)
+    return jsonify(bazaar_api.favorites_post(request.json))
 
 
 # delete favorite<id>
 @app.route("/api/favorites/remove", methods=["DELETE"])
 def api_favorites_delete():
-    return bazaar_api.favorites_delete(request.json[0])
+    return jsonify(bazaar_api.favorites_delete(request.json[0]))
 
 # get news
 @app.route("/api/news")
