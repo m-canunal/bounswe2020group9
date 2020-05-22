@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35c22539-111b-49ad-b39b-6fc18c627cbd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bazaar_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/bazaar_api.py" afterDir="false" />
-    </list>
+    <list default="true" id="35c22539-111b-49ad-b39b-6fc18c627cbd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,8 +85,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Flask server.Flask" />
       <item itemvalue="Python.cmpe352API" />
+      <item itemvalue="Flask server.Flask" />
     </list>
   </component>
   <component name="SvnConfiguration">
