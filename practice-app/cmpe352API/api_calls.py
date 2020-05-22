@@ -20,12 +20,13 @@ def get_nasa_apod(date):
     }
     response = requests.get(
         "https://api.nasa.gov/planetary/apod",
+
         params=params
     )
     if response.status_code == 400:
         return {
             "400, bad request": {
-                "solution": "please enter a valid date as %Y-%m-%d",
+                "solution": "please enter a valid date: as %Y-%m-%d",
                 "example": "2019-02-20"
             }
         }
