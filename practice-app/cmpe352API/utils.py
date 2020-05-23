@@ -16,8 +16,9 @@ def getTodayString():
     return str(date.year) + "-" + str(date.month) + "-" + str(date.day)
 
 def sortByConfidence(annList):
-    retList =sorted(annList, key = lambda i: i['confidence'])
+    retList =sorted(annList, key = lambda i: i['confidence'], reverse = True)
     return retList
+
 def getFreeID(dictionary):
     # Gets dictionary as input, returns the first integer that is not being used
     # Used in data.api["favorites"] to fina a free slot
