@@ -48,7 +48,7 @@ def get_news(date):
     jsonList.append(response.json())
     nasa = get_nasa_apod(date)
     params = {
-        "q": nasa["copyright"],
+        "q": "\""+nasa["title"]+"\"",
         "language": "en",
         "from": utils.getMaxDate,
         "sortBy": "popularity",
@@ -58,5 +58,18 @@ def get_news(date):
         "http://newsapi.org/v2/everything?",
         params=params
     )
-    jsonList.append(response.json)
+    jsonList.append(response.json())
     return jsonList
+def get_topics(date):
+    nasa = get_nasa_apod(date)
+    params = {
+        "text":nasa["explanation"],
+        "lang":"en",
+        "token":"65bb2b59039e48938896fb18fc547ef6"
+    }
+    response = requests.get(
+        "https://api.dandelion.eu/datatxt/nex/v1",
+        params=params
+    )
+    x=response.json()
+    return x

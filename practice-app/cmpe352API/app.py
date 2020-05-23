@@ -51,11 +51,15 @@ def api_favorites_post():
 def api_favorites_delete():
     return jsonify(bazaar_api.favorites_delete(request.json[0]))
 
+@app.route("/api/context")
+def api_context():
+    return jsonify(api_calls.get_topics(utils.getTodayString()))
+
 # get news
 @app.route("/api/news")
 def api_news():
     jsonList=api_calls.get_news(utils.getTodayString())
-    return jsonify(jsonList[0])
+    return jsonify(jsonList[1])
 
 # Return the fetched APOD json, day: <string:date>
 @app.route("/api/apod/<string:date>")
