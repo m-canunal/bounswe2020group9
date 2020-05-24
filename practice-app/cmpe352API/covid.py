@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime, timedelta
 
 def getCasesByCountryAndDate(country,date):
 	fromString=date+"T00:00:00Z"
@@ -11,14 +12,16 @@ def getCasesByCountryAndDate(country,date):
 	
 	url="https://api.covid19api.com/country/"+country+"?"
 	response=requests.get(url,params=params)
-	print(response.json())
+	return response.json()
 
-getCasesByCountryAndDate("italy","2020-05-23")
+print(getCasesByCountryAndDate("italy","2020-05-23"))
 
 
 def getAllCountriesByDate(date):
 	fromString=date+"T00:00:00Z"
-	toString="2020-08-01T00:00:01Z"
+	incrementedDate=(datetime.strptime(date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+	print(incrementedDate)
+	toString=incrementedDate+"T00:00:00Z"
 	params = {
 		"from": fromString,
 		"to": toString
@@ -27,9 +30,9 @@ def getAllCountriesByDate(date):
 	url="https://api.covid19api.com/world?"
 	response=requests.get(url,params=params)
 
-	print(response.json()[0])
+	return response.json()
 
-getAllCountriesByDate("2020-05-02")
+print(getAllCountriesByDate("2020-05-02"))
 
 def getTurkeyByDate(date):
 	fromString=date+"T00:00:00Z"
@@ -41,6 +44,15 @@ def getTurkeyByDate(date):
 	
 	url="https://api.covid19api.com/country/turkey?"
 	response=requests.get(url,params=params)
-	print(response.json())
+	return response.json()
 
-getTurkeyByDate("2020-05-23")
+print(getTurkeyByDate("2020-05-23"))
+
+
+def getGlobalAndTurkeysDataByDate(date):
+	globalData=getAllCountriesByDate(date)
+	turkeyData=getTurkeyByDate(date)
+	globalData+=turkeyData
+	return globalData
+
+print(getGlobalAndTurkeysDataByDate("2020-05-23"))
