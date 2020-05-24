@@ -55,11 +55,14 @@ def api_favorites_delete():
 def api_context():
     return jsonify(api_calls.get_topics(utils.getTodayString()))
 
+#get news about nasa photo
+@app.route("/api/news/nasa")
+def api_nasa_news():
+    return jsonify(api_calls.get_nasa_news(utils.getTodayString()))
 # get news
 @app.route("/api/news")
 def api_news():
-    jsonList=api_calls.get_news(utils.getTodayString())
-    return jsonify(jsonList[1])
+    return jsonify(api_calls.get_news(utils.getTodayString()))
 
 # Return the fetched APOD json, day: <string:date>
 @app.route("/api/apod/<string:date>")

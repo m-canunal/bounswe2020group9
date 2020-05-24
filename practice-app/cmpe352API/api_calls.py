@@ -31,24 +31,11 @@ def get_nasa_apod(date):
         }
     return response.json()
 
-
-def get_news(date):
-    jsonList=[]
-    params = {
-        "q": "",
-        "country": "us",
-        "from": date,  # example: "2020-05-19"
-        "sortBy": "popularity",
-        "apiKey": "64508aee042e414b93c1d5b047904c04"
-    }
-    response = requests.get(
-        "http://newsapi.org/v2/top-headlines?",
-        params=params
-    )
-    jsonList.append(response.json())
+def get_nasa_news(date):
     nasa = get_nasa_apod(date)
     topics = get_topics(date)
     annList = utils.sortByConfidence(topics["annotations"])
+    print(annList[0])
     x = 0
     i = 0
     while x == 0:
@@ -67,8 +54,24 @@ def get_news(date):
         if not response.json()["totalResults"] == 0:
             x = 1
         i += 1
-    jsonList.append(response.json())
-    return jsonList
+    res = response.json()
+    return res["articles"]
+
+def get_news(date):
+    params = {
+        "q": "",
+        "country": "us",
+        "from": date,  # example: "2020-05-19"
+        "sortBy": "popularity",
+        "apiKey": "64508aee042e414b93c1d5b047904c04"
+    }
+    response = requests.get(
+        "http://newsapi.org/v2/top-headlines?",
+        params=params
+    )
+    res = response.json()
+    return res["articles"]
+    
 
 
 def get_topics(date):
