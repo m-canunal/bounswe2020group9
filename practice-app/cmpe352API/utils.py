@@ -24,6 +24,30 @@ def getFreeID(dictionary):
         key += 1
     return key
 
+def getMaxDate():
+    time = datetime.datetime.now()
+    if time.day==31:
+        return str(time.year) + "-" + str(time.month) + "-" + str(time.day-30)
+    else:
+        if time.month==1:
+            return str(time.year-1) + "-" + str(12) + "-" + str(time.day+1)
+        elif time.month ==3:
+            if time.year % 4 ==0:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day-1)
+            else:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day-2)
+        elif time.month <=7:
+            if time.month % 2 == 0:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day+1)
+            else:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day)
+        elif time.month==8:
+            return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day+1)
+        else:
+            if time.month % 2 == 0:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day)
+            else:
+                return str(time.year) + "-" + str(time.month-1) + "-" + str(time.day+1)
 
 # The Json on the main menu
 mainMenu = {
