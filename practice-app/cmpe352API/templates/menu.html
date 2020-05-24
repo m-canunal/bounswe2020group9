@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> cmpe352 Group9 API </title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* Style the header */
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Style the top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        /* Style the topnav links */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 15px 5%;
+            text-decoration: none;
+            border-radius: 20px;
+            position: relative;
+            left: 30%;
+        }
+
+        /* Change color on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Style the left (main) frame */
+        .frame {
+            float: left;
+            width: 70%;
+            height: 800px;
+            padding: 50px;
+        }
+
+        /* Style the right (favorites) frame */
+        .favorites {
+            float: left;
+            width: 30%;
+            padding: 50px 30px;
+        }
+
+        .favorites .favorite {
+            display: block;
+            background-color: #ddd;
+            text-align: center;
+            padding: 10px 10px;
+            text-decoration: none;
+            margin: 10px;
+        }
+        .favorites .favorite .date {
+            width: 80%;
+        }
+
+        .favorites .favorite .del_button {
+            width: 10%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: #f1f1f1;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <form action="/api/news", method="GET">
+            <input name = "text">
+            <input type="submit", value="Search Day">
+        </form>
+    </div>
+
+    <div class="topnav" id="topnav">
+        <a href="api/apod" id="button1" method = "post">apod API</a>
+        <a href="api/news" id="button2">news API</a>
+        <a href="favorites" id="button3">Favorites</a>
+    </div>
+    <div class="row">
+        <div class="frame">
+            <h2 style="background-color: darkgreen; text-align: center;">Column</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus
+                venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget
+                aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor
+                sed accumsan convallis.</p>
+        </div>
+        <div class="favorites">
+            <h1 style="text-align: center;">Favorites:</h1>
+            <div class="favorite">
+                <div class="date">
+                    <h2> 1: 2012-12-12</h2>
+                </div>
+                <button class="del_button"> Go </button>
+                <button class="del_button"> Delete </button>
+            </div>
+            <div class="favorite">
+                <div class="date">
+                    <h2> 2: 1999-21-06</h2>
+                </div>
+                <button class="del_button"> Go </button>
+                <button class="del_button"> Delete </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>hurr durr im footer</p>
+    </div>
+</body>
+
+</html>

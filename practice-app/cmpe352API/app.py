@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main_menu():
-    return jsonify(utils.mainMenu)
+    return render_template("menu.html")
 
 
 # return the api of "YYYY-mm-dd"
@@ -64,7 +64,8 @@ def api_apod(date):
 # Return the fetched APOD json, day: <Today>
 @app.route("/api/apod")
 def api_apod_today():
-    return jsonify(api_calls.get_nasa_apod(utils.getTodayString()))
+    return "Hello World!"
+        #jsonify(api_calls.get_nasa_apod(utils.getTodayString()))
 
 
 # View the Astronomy Picture of the Day: <string:date>
@@ -92,7 +93,9 @@ def apod_today():
 def not_found(error):
     return make_response(jsonify({"404": "not found"}), 404)
 
-
+@app.route("/routes")
+def routes():
+    return jsonify(utils.mainMenu)
 # This is here as app.py is our main file
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
