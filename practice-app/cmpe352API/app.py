@@ -20,14 +20,12 @@ def main_menu():
     return render_template("menu.html")
 
 
-# return the api of "YYYY-mm-dd"
-@app.route("/api/<string:date>")
-def get_api(date):
-    return jsonify(bazaar_api.get_api(date))
-
-# return the api of today
 @app.route("/api")
-def get_api_today():
+def get_api():
+    if request.args.get("date"):
+    # return the api of "YYYY-mm-dd"
+        return jsonify(bazaar_api.get_api(request.args.get("date")))
+    # else return the api of today
     return jsonify(bazaar_api.get_api(utils.getTodayString()))
 
 
@@ -56,22 +54,22 @@ def api_favorites_delete():
 def api_news():
     return jsonify(api_calls.get_news(utils.getTodayString()))
 
-# Return the fetched APOD json, day: <string:date>
-@app.route("/api/apod/<string:date>")
-def api_apod(date):
-    return jsonify(api_calls.get_nasa_apod(date))
-
-# Return the fetched APOD json, day: <Today>
 @app.route("/api/apod")
-def api_apod_today():
-    return "Hello World!"
-        #jsonify(api_calls.get_nasa_apod(utils.getTodayString()))
+def api_apod():
+    if request.args.get("date"):
+    # return the api of "YYYY-mm-dd"
+        return jsonify(api_calls.get_nasa_apod(request.args.get("date")))
+    # return the api of today
+    return jsonify(api_calls.get_nasa_apod(utils.getTodayString()))
 
-
-# View the Astronomy Picture of the Day: <string:date>
-@app.route("/apod/<string:date>")
-def apod(date):
-    apodJson = api_calls.get_nasa_apod(date)
+@app.route("/apod")
+def apod_today():
+    if request.args.get("date"):
+    # View the Astronomy Picture of the Day: "YYYY-mm-dd"
+        apodJson = api_calls.get_nasa_apod(request.args.get("date"))
+    else:
+    # View the Astronomy Picture of the Day: <Today>
+        apodJson = api_calls.get_nasa_apod(utils.getTodayString())
     if "400, bad request" in apodJson:
         return jsonify(apodJson)
     url = apodJson["url"]
@@ -79,23 +77,16 @@ def apod(date):
         url = apodJson["hdurl"]
     return render_template("apod.html", url=url)
 
-# View the Astronomy Picture of the Day: <Today>
-@app.route("/apod")
-def apod_today():
-    apodJson = api_calls.get_nasa_apod(utils.getTodayString())
-    if "hdurl" in apodJson:
-        url = apodJson["hdurl"]
-    return render_template("apod.html", url=apodJson["url"])
-
 
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({"404": "not found"}), 404)
+    return make_response(jsonify({"404": "Not Found"}), 404)
 
-@app.route("/routes")
-def routes():
-    return jsonify(utils.mainMenu)
+@app.errorhandler(500)
+def not_found(error):
+    return make_response(jsonify({"500": "Internal Server Error"}), 500)
+
 # This is here as app.py is our main file
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

@@ -94,10 +94,17 @@
 
 <body>
     <div class="header">
-        <form action="/api/news", method="GET">
-            <input name = "text">
+
+        <form action="/apod", method="GET">
+            <input name = "date">
             <input type="submit", value="Search Day">
         </form>
+
+        <form action="/api/apod", method="GET">
+            <input name = "date">
+            <input type="submit", value="Search Json">
+        </form>
+
     </div>
 
     <div class="topnav" id="topnav">

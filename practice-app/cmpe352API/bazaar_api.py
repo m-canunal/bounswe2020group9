@@ -19,10 +19,11 @@ favorites = {0: ["first"], 1: ["second"], 2: ["third"], 3: ["fourth"], 4: ["fift
 
 # Get api depending on date
 def get_api(date):
-    api = {"favorites": favorites}
-    api["news"] = api_calls.get_news(date)
-    api["apod"] = api_calls.get_nasa_apod(date)
-    # add more if necessary
+    api = {"favorites": favorites,
+        "news" : api_calls.get_news(date),
+        "apod" : api_calls.get_nasa_apod(date)
+        # add more if necessary
+    }
     return api
 
 
