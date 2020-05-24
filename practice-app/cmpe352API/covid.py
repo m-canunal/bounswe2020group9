@@ -9,9 +9,9 @@ def getCasesByCountryAndDate(country,date):
 		"to": toString
 	}
 	
-	url="https://api.covid19api.com/total/country/"+country+"/status/confirmed?"
+	url="https://api.covid19api.com/country/"+country+"?"
 	response=requests.get(url,params=params)
-	print(response.json()[0]['Cases'])
+	print(response.json())
 
 getCasesByCountryAndDate("italy","2020-05-23")
 
@@ -39,8 +39,8 @@ def getTurkeyByDate(date):
 		"to": toString
 	}
 	
-	url="https://api.covid19api.com/total/country/turkey/status/confirmed?"
+	url="https://api.covid19api.com/country/turkey?"
 	response=requests.get(url,params=params)
-	print(response.json()[0]['Cases'])
+	print(response.json())
 
 getTurkeyByDate("2020-05-23")
