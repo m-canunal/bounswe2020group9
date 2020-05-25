@@ -49,6 +49,7 @@ mainMenu = {
             },
             "/api/weather": {
                 "weather/<string:Date>": "Get the weather of <Date>",
+                "weather/today": "Get the weather forecats for today",
             },
             "Errors": {
                 "/": {"404": "not found"},
