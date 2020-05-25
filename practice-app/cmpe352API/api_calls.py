@@ -1,5 +1,6 @@
 # Library imports
 import requests
+import covid
 
 # Custom files' imports
 from flask import jsonify
@@ -45,3 +46,10 @@ def get_news(date):
         params=params
     )
     return response.json()
+
+def get_covid(date):
+    return getGlobalAndTurkeysDataByDate(date)
+
+
+
+
