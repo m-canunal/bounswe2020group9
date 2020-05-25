@@ -32,7 +32,6 @@ def get_api_today():
 
 
 
-
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
 def api_favorites():
@@ -85,6 +84,12 @@ def apod_today():
     if "hdurl" in apodJson:
         url = apodJson["hdurl"]
     return render_template("apod.html", url=apodJson["url"])
+
+# Return the fetched weather json, day: <string:date>
+@app.route("/api/weather/<string:date>")
+def weather(date):
+    return jsonify(api_calls.get_weather(date))
+
 
 
 # Error handlers

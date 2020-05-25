@@ -22,6 +22,8 @@ def get_api(date):
     api = {"favorites": favorites}
     api["news"] = api_calls.get_news(date)
     api["apod"] = api_calls.get_nasa_apod(date)
+    api["weather"] = api_calls.get_weather(date)
+    
     # add more if necessary
     return api
 

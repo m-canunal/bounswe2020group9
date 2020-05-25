@@ -47,6 +47,9 @@ mainMenu = {
                 "/api/news": "Get the \"news API\" of today",
                 "/api/news/<string:Date>": "Get the \"news API\" of <Date>",
             },
+            "/api/weather": {
+                "weather/<string:Date>": "Get the weather of <Date>",
+            },
             "Errors": {
                 "/": {"404": "not found"},
             }
