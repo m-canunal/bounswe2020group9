@@ -1,6 +1,7 @@
 # Library imports
 from flask import Flask, render_template, jsonify, make_response, request
 import os
+from datetime import datetime, timedelta
 # Custom files' imports
 import api_calls, utils, bazaar_api
 
@@ -85,6 +86,20 @@ def apod_today():
     if "hdurl" in apodJson:
         url = apodJson["hdurl"]
     return render_template("apod.html", url=apodJson["url"])
+
+
+# get covid
+@app.route("/api/covid")
+def api_covid():
+    decrementedDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
+    print(decrementedDate)
+    return jsonify(api_calls.get_covid(decrementedDate))
+
+
+
+
+
+
 
 
 # Error handlers

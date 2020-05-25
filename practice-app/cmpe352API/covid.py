@@ -16,7 +16,7 @@ def getCasesByCountryAndDate(country,date):
 	response=requests.get(url,params=params)
 	return response.json()
 
-print(getCasesByCountryAndDate("italy","2020-05-23"))
+#print(getCasesByCountryAndDate("italy","2020-05-23"))
 
 
 def getAllCountriesByDate(date):
@@ -34,7 +34,7 @@ def getAllCountriesByDate(date):
 
 	return response.json()
 
-print(getAllCountriesByDate("2020-05-02"))
+#print(getAllCountriesByDate("2020-05-02"))
 
 def getTurkeyByDate(date):
 	fromString=date+"T00:00:00Z"
@@ -48,7 +48,7 @@ def getTurkeyByDate(date):
 	response=requests.get(url,params=params)
 	return response.json()
 
-print(getTurkeyByDate("2020-05-23"))
+#print(getTurkeyByDate("2020-05-23"))
 
 
 def getGlobalAndTurkeysDataByDate(date):
@@ -57,7 +57,7 @@ def getGlobalAndTurkeysDataByDate(date):
 	globalData+=turkeyData
 	return globalData
 
-print(getGlobalAndTurkeysDataByDate("2020-05-23"))
+#print(getGlobalAndTurkeysDataByDate("2020-05-23"))
 
 
 class Test_Covid19_API(unittest.TestCase):

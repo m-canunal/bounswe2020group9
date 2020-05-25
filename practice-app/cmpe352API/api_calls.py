@@ -48,7 +48,7 @@ def get_news(date):
     return response.json()
 
 def get_covid(date):
-    return getGlobalAndTurkeysDataByDate(date)
+    return covid.getGlobalAndTurkeysDataByDate(date)
 
 
 
