@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main_menu():
-    return render_template("menu.html")
+    return render_template("menu.html", today = utils.getTodayString())
 
 
 @app.route("/api")
@@ -41,35 +41,36 @@ def api_favorites():
 @app.route("/api/favorites/add", methods=["POST"])
 def api_favorites_post():
     # request.json is the json object user has given to us
-    return jsonify(bazaar_api.favorites_post(request.json))
+    return jsonify(bazaar_api.favorites_post(str(request.data)[2:-1]))
 
 
-# delete favorite<id>
+# delete favorite that is given
 @app.route("/api/favorites/remove", methods=["DELETE"])
 def api_favorites_delete():
-    return jsonify(bazaar_api.favorites_delete(request.json[0]))
+    return jsonify(bazaar_api.favorites_delete(str(request.data)[2:-1]))
 
 # get news
 @app.route("/api/news")
 def api_news():
     return jsonify(api_calls.get_news(utils.getTodayString()))
 
-@app.route("/api/apod")
-def api_apod():
-    if request.args.get("date"):
-    # return the api of "YYYY-mm-dd"
-        return jsonify(api_calls.get_nasa_apod(request.args.get("date")))
+@app.route("/api/apod/")
+def api_apod_today():
     # return the api of today
-    return jsonify(api_calls.get_nasa_apod(utils.getTodayString()))
+    return api_apod(utils.getTodayString())
+@app.route("/api/apod/<string:date>")
+def api_apod(date):
+    # return the api of date
+    return jsonify(api_calls.get_nasa_apod(date))
 
-@app.route("/apod")
+@app.route("/apod/")
 def apod_today():
-    if request.args.get("date"):
-    # View the Astronomy Picture of the Day: "YYYY-mm-dd"
-        apodJson = api_calls.get_nasa_apod(request.args.get("date"))
-    else:
     # View the Astronomy Picture of the Day: <Today>
-        apodJson = api_calls.get_nasa_apod(utils.getTodayString())
+    return apod(utils.getTodayString())
+@app.route("/apod/<string:date>")
+def apod(date):
+    # View the Astronomy Picture of the Day: "YYYY-mm-dd"
+    apodJson = api_calls.get_nasa_apod(date)
     if "400, bad request" in apodJson:
         return jsonify(apodJson)
     url = apodJson["url"]
