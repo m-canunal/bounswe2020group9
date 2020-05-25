@@ -62,7 +62,13 @@ def api_nasa_news():
 # get news
 @app.route("/api/news")
 def api_news():
-    return jsonify(api_calls.get_news(utils.getTodayString()))
+    response = api_calls.get_news(utils.getTodayString())
+    if type(response[0]) is int:
+        if response[0][0] == 0:
+            response = "Please give a valid date."
+        elif response[0][0] == 2:
+            response = "No articles about the date specified."
+    return jsonify(response)
 
 # Return the fetched APOD json, day: <string:date>
 @app.route("/api/apod/<string:date>")

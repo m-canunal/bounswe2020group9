@@ -27,6 +27,17 @@ def getFreeID(dictionary):
         key += 1
     return key
 
+def checkDate(dateString):
+    maxDateString = getMaxDate()
+    lastMaxIndex = maxDateString.rfind('-')
+    lastDateIndex = dateString.rfind('-')
+    date = datetime.datetime(int(dateString[0:4]), int(dateString[5:lastDateIndex]), int(dateString[lastDateIndex+1:]))
+    maxDate = datetime.datetime(int(maxDateString[0:4]), int(maxDateString[5:lastMaxIndex]), int(maxDateString[lastMaxIndex + 1:]))
+    if date < maxDate:
+        return False
+    else:
+        return True
+
 def getMaxDate():
     time = datetime.datetime.now()
     if time.day==31:
