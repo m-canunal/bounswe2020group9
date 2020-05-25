@@ -56,4 +56,9 @@ def get_weather_today():
     def get_weather(date):
         location="Istanbul,TR,34342"
         url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+date+"T00:00:00&endDateTime="+date+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+location+"&key=7ITZ7NZ04VSIKZBKADNHGZ1UJ"
+<<<<<<< HEAD
         return requests.get(url).json()
+=======
+        return requests.get(url).json()
+
+>>>>>>> 67d28793be2e2f70af6acb91951b440e0156976f
