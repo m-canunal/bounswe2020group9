@@ -60,7 +60,7 @@ def getGlobalAndTurkeysDataByDate(date):
 print(getGlobalAndTurkeysDataByDate("2020-05-23"))
 
 
-class Covid19_API(unittest.TestCase):
+class Test_Covid19_API(unittest.TestCase):
     def test_api(self):
         country= "germany"
 	data= "2020-05-23"
