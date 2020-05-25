@@ -17,6 +17,9 @@ def getTodayString():
         return str(date.year) + "-0" + str(date.month) + "-" + str(date.day)
     return str(date.year) + "-" + str(date.month)+ "-" + str(date.day)
 
+def sortByConfidence(annList):
+    retList =sorted(annList, key = lambda i: i['confidence'], reverse = True)
+    return retList
 
 def getFreeID(dictionary):
     # Gets dictionary as input, returns the first integer that is not being used
@@ -25,6 +28,17 @@ def getFreeID(dictionary):
     while key in dict.keys(dictionary):
         key += 1
     return key
+
+def checkDate(dateString):
+    maxDateString = getMaxDate()
+    lastMaxIndex = maxDateString.rfind('-')
+    lastDateIndex = dateString.rfind('-')
+    date = datetime.datetime(int(dateString[0:4]), int(dateString[5:lastDateIndex]), int(dateString[lastDateIndex+1:]))
+    maxDate = datetime.datetime(int(maxDateString[0:4]), int(maxDateString[5:lastMaxIndex]), int(maxDateString[lastMaxIndex + 1:]))
+    if date < maxDate:
+        return False
+    else:
+        return True
 
 def getMaxDate():
     time = datetime.datetime.now()

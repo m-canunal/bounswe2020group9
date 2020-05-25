@@ -30,6 +30,10 @@ def get_api():
 
 
 
+# return the api of "YYYY-mm-dd"
+@app.route("/api/<string:date>")
+def get_api(date):
+    return jsonify(bazaar_api.get_api(date))
 
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
@@ -49,10 +53,24 @@ def api_favorites_post():
 def api_favorites_delete():
     return jsonify(bazaar_api.favorites_delete(str(request.data)[2:-1]))
 
+@app.route("/api/context")
+def api_context():
+    return jsonify(api_calls.get_topics(utils.getTodayString()))
+
+#get news about nasa photo
+@app.route("/api/news/nasa")
+def api_nasa_news():
+    return jsonify(api_calls.get_nasa_news(utils.getTodayString()))
 # get news
 @app.route("/api/news")
 def api_news():
-    return jsonify(api_calls.get_news(utils.getTodayString()))
+    response = api_calls.get_news(utils.getTodayString())
+    if type(response[0]) is int:
+        if response[0][0] == 0:
+            response = "Please give a valid date."
+        elif response[0][0] == 2:
+            response = "No articles about the date specified."
+    return jsonify(response)
 
 @app.route("/api/apod/")
 def api_apod_today():
