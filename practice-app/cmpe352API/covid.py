@@ -1,6 +1,8 @@
 import requests
 import json
+import unittest
 from datetime import datetime, timedelta
+
 
 def getCasesByCountryAndDate(country,date):
 	fromString=date+"T00:00:00Z"
@@ -56,3 +58,29 @@ def getGlobalAndTurkeysDataByDate(date):
 	return globalData
 
 print(getGlobalAndTurkeysDataByDate("2020-05-23"))
+
+
+class Covid19_API(unittest.TestCase):
+    def test_api(self):
+        country= "germany"
+	data= "2020-05-23"
+        results = getCasesByCountryAndDate(country,data)
+        if(results is not None):
+            self.assertTrue("Country" in results)
+            self.assertTrue("CountryCode" in results)
+            self.assertTrue("Province" in results)
+            self.assertTrue("City" in results)
+	    self.assertTrue("CityCode" in results)
+            self.assertTrue("Lat" in results)
+            self.assertTrue("Lon" in results)
+            self.assertTrue("Cases" in results)
+            self.assertTrue("Status" in results)
+            self.assertTrue("Date" in results)
+		
+    def test_the_result(self):
+        country= "germany"
+	data= "2020-05-23"
+        self.assertTrue(getCasesByCountryAndDate(country,data))
+                        
+if(__name__ == "__main__"):
+    unittest.main()
