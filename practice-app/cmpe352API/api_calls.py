@@ -45,3 +45,17 @@ def get_news(date):
         params=params
     )
     return response.json()
+
+def get_currencies(date):
+    url = "https://currency-exchange.p.rapidapi.com/exchange"
+
+    querystring = {"q":"1.0","from":"SGD","to":"MYR"}
+
+    headers = {
+        'x-rapidapi-host': "currency-exchange.p.rapidapi.com",
+        'x-rapidapi-key': "c94c624004msh01721a04d9bbbf2p1b6835jsnbe9e5824019f"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    return response.text
