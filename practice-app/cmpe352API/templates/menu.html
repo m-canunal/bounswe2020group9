@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> cmpe352 Group9 API </title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* Style the header */
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Style the top navigation bar */
+        .navBar {
+            overflow: hidden;
+            background-color: dimgray;
+        }
+
+        /* Style the topnav links */
+        .navBar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            font-weight: bold;
+            padding: 15px 5%;
+            text-decoration: none;
+             /* for smooth edges */
+            border-radius: 15px;
+             /* buttons to be at middle
+            position: relative;
+            left: 20%;
+            */
+        }
+
+        /* Change color on hover */
+        .navBar a:hover {
+            background-color: lightgray;
+            color: black;
+            cursor: pointer;
+        }
+
+        /* Style the left (main) frame */
+        .frame {
+            float: left;
+            width: 70%;
+            height: 800px;
+            padding: 50px;
+        }
+
+        /* Style the right (favorites) frame */
+        .favorites {
+            float: left;
+            width: 30%;
+            padding: 50px 30px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: #f1f1f1;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class = "title"> Date API Search </h1>
+        <p id = "info" style="color: gray"> Please enter a date </p>
+        <input id = "date" type="text" placeholder = "{{today}}">
+        <button id = "search"> Search </button>
+        <button id = "search_json"> Search Json </button>
+    </div>
+    <div class="navBar" id="topnav">
+        <a href="api/apod" id="apod" method = "post">apod API</a>
+        <a href="api/news" id="button2">news API</a>
+        <a href="api/favorites" id="button3">Test Button</a>
+        <a href="/" id="button_home" style="float: right;">Home</a>
+        <a id="add_to_favorites" style="float: right;">Add To Favorites</a>
+    </div>
+    <div class="row">
+        <div class="frame">
+            <h2 id="body_title" style="text-align: center;">Greetings!</h2>
+            <p id="body" style="text-align: center;">This is the home page of our API.</p>
+        </div>
+        <div class="favorites">
+            <h2 style="text-align: center;">Favorites:</h2>
+            <ol id="favs"></ol>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>hurr durr im footer</p>
+    </div>
+
+    <script>
+        function listFavs(){
+            const favs = document.getElementById("favs");
+            // Delete all old values
+            reset(favs);
+            // Fetch favorites
+            var favsAPI = fetch("api/favorites")
+                .then((response) => response.json())
+                .then(function (data) {
+                    let favorites = data;
+                    let i = 0;
+                    // If there are no favorites
+                    if (!favorites.length) {
+                        let text = document.createElement("p");
+                        text.innerText = "There are no Favorites";
+                        text.style.textAlign = "center";
+                        append(favs, text);
+                        return;
+                    }
+                    // Else (if there are favorites)
+                    return favorites.map(function (favorites) {
+                        let li = document.createElement("li"),
+                            span = document.createElement("span"),
+                            go_button = document.createElement("button"),
+                            delete_button = document.createElement("button");
+                        span.innerHTML = `${favorites} `;
+                        span.style.fontWeight = "bold";
+                        // "Go" button attributions
+                        go_button.innerHTML = "Go to Date";
+                        go_button.onclick = function(){
+                            // go to that date
+                            // copied from  "document.getElementById("search").onclick" below
+                            var date = span.innerHTML;
+                            var body = document.getElementById("body");
+                            console.log(`search_json: \"${date}\"`);
+                            var call = fetch(action="/api/apod/" +date)
+                                .then(request => request.json())
+                                .then(function(request){
+                                    if (request["400, bad request"]){
+                                        document.getElementById("body_title").innerText = "400, Bad Request"
+                                        document.getElementById("body").innerText = request["400, bad request"]["solution"];
+                                        return;
+                                    }
+
+                                    console.log(request);
+                                    var title = document.createElement("P");
+                                    title.innerText = request["title"];
+                                    var date = document.getElementById("body_title");
+                                    date.innerText = request["date"];
+                                    var img = document.createElement("img");
+                                    img.src = request["url"];
+                                    img.width = "500";
+                                    var explanation = document.createElement("P");
+                                    explanation.innerText = request["explanation"];
+                                    // Delete all old values
+                                    reset(body);
+                                    append(body,title);
+                                    append(body,img);
+                                    append(body,explanation);
+                                });
+                        }
+                        // "Delete" button attributions
+                        delete_button.innerHTML = "Delete";
+                        delete_button.onclick = function(){
+                            // delete that date from favorites
+                            var deleteFromFav = fetch("/api/favorites/remove", {method: "DELETE", body : favorites})
+                            .then(listFavs())
+                        }
+                        append(li, span);
+                        append(li, go_button);
+                        append(li,delete_button)
+                        append(favs,li);
+                    })
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+        function append(parent, child){
+            return parent.appendChild(child);
+        }
+        function reset(parent){
+            while (parent.firstChild){
+                parent.removeChild(parent.lastChild);
+            }
+        }
+        document.getElementById("search").onclick = function () {
+            var date = document.getElementById("date").value;
+            var body = document.getElementById("body");
+            console.log(`search_json: \"${date}\"`);
+            var call = fetch(action="/api/apod/" +date)
+                .then(request => request.json())
+                .then(function(request){
+                    console.log(request);
+                    if (request["400, bad request"]){
+                        document.getElementById("body_title").innerText = "400, Bad Request"
+                        document.getElementById("body").innerText = request["400, bad request"]["solution"];
+                        return;
+                    }
+                    var title = document.createElement("P");
+                    title.innerText = request["title"];
+                    var date = document.getElementById("body_title");
+                    date.innerText = request["date"];
+                    var img = document.createElement("img");
+                    img.src = request["url"];
+                    img.width = "500";
+                    var explanation = document.createElement("P");
+                    explanation.innerText = request["explanation"];
+                    // Delete all old values
+                    reset(body);
+                    append(body,title);
+                    append(body,img);
+                    append(body,explanation);
+                })
+        };
+        document.getElementById("search_json").onclick = function () {
+            var date = document.getElementById("date").value;
+            var body = document.getElementById("body");
+            console.log(`search: \"${date}\"`);
+            var call = fetch(action="/api/apod/" +date)
+                .then(request => request.json())
+                .then(function(request){
+                    console.log(request);
+                    document.getElementById("body_title").innerText = (date == "" ? "Today's" : date) + " JSON";
+                    document.getElementById("body").innerText = JSON.stringify(request);
+                });
+        };
+        document.getElementById("add_to_favorites").onclick = function (){
+            var date = document.getElementById("date").value;
+            console.log(`add to favorites: \"${date}\"`);
+            var addFav = fetch(action="/api/favorites/add", {"method": "POST","body": date})
+                .then(listFavs());
+        }
+
+        window.onload = function (){
+            listFavs();
+        }
+    </script>
+</body>
+
+</html>
