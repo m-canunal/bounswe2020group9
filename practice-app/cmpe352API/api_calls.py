@@ -46,6 +46,12 @@ def get_news(date):
     )
     return response.json()
 
+def get_weather_today():
+    location="Istanbul,TR,34342"
+    today=utils.getTodayString()
+    url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+today+"T00:00:00&endDateTime="+today+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+location+"&key=7ITZ7NZ04VSIKZBKADNHGZ1UJ"
+    return requests.get(url).json()
+
 # alcan & hasan was here
 def get_weather(date):
     g = geocoder.ip('me')
@@ -61,3 +67,4 @@ def get_weather_today():
     return requests.get(url).json()
 
     
+

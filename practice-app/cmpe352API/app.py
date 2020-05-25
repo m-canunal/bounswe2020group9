@@ -102,5 +102,5 @@ def not_found(error):
 
 
 # This is here as app.py is our main file
-if __name__ == '__main__':
+if __name__ == '_main_':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
