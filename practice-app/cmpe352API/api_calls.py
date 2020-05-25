@@ -1,6 +1,9 @@
 # Library imports
 import requests
+
+import covid
 import utils
+
 # Custom files' imports
 from flask import jsonify
 
@@ -92,5 +95,11 @@ def get_topics(date):
         "https://api.dandelion.eu/datatxt/nex/v1",
         params=params
     )
-    x=response.json()
-    return x
+
+    return response.json()
+
+def get_covid(date):
+    return covid.getGlobalAndTurkeysDataByDate(date)
+
+
+
