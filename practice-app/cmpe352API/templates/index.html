@@ -3863,26 +3863,25 @@ html {
         <div class="sectionDark">
             <div class="row">
                 <div class="myImage">
-                    <img class="img-fluid" src="https://apod.nasa.gov/apod/image/2005/marsglobe_viking_960.jpg">
+                    <img class="img-fluid" id ="apod_pic" src="https://apod.nasa.gov/apod/image/1902/EtaCarinae_HubbleSchmidt_960.jpg">
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h1>NASA<br></h1>
+                            <h1>NASA Astronomy Picture of the Day<br></h1>
 
-                            <h4>"The Milky Way over Snow-Capped Himalayas"<br><br></h4> 
+                            <h4 id="apod_title">"Doomed Star Eta Carinae"<br><br></h4>
 
                             <h4>Copyright:</h4> 
-                            <p>"TomasHavel"</p>
+                            <p id="apod_copyright">"TomasHavel"</p>
 
                             <h4>Date:</h4> 
-                            <p>2020-05-26</p>
+                            <p id="apod_date">2020-05-26</p>
 
                             <h4>Explanation:</h4> 
-                            <p>What’s higher than the Himalayas? Although the Himalayan Mountains are the tallest on planet Earth, they don't measure up to the Milky Way. Visible above the snow-capped mountains in the featured image is the arcing central band of our home galaxy.  The bright spot just above the central plane is the planet Jupiter, while the brightest orange spot on the upper right is the star Antares.  The astrophotographer braved below-zero temperatures at nearly 4,000-meters altitude to take the photographs that compose this image.  The featured picture is a composite of eight exposures taken with same camera and from the same location over three hours, just after sunset, in 2019 April, from near Bimtang Lake in Nepal.  Over much of planet Earth, the planets Mercury (faint) and Venus (bright) will be visible this week after sunset.   Experts Debate: How will humanity first discover extraterrestrial life?"</p>
+                            <p id="apod_explanation">What’s higher than the Himalayas? Although the Himalayan Mountains are the tallest on planet Earth, they don't measure up to the Milky Way. Visible above the snow-capped mountains in the featured image is the arcing central band of our home galaxy.  The bright spot just above the central plane is the planet Jupiter, while the brightest orange spot on the upper right is the star Antares.  The astrophotographer braved below-zero temperatures at nearly 4,000-meters altitude to take the photographs that compose this image.  The featured picture is a composite of eight exposures taken with same camera and from the same location over three hours, just after sunset, in 2019 April, from near Bimtang Lake in Nepal.  Over much of planet Earth, the planets Mercury (faint) and Venus (bright) will be visible this week after sunset.   Experts Debate: How will humanity first discover extraterrestrial life?"</p>
 
-                            <h4>URL:</h4> 
-                            <a href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">Visit WEBSITE </a>
+                            <a id="apod_link" href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">View HD </a>
 
                         </div>
                     </div>
@@ -4134,17 +4133,62 @@ html {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script id="weather_script">
-        document.getElementById("submit_button").onclick = function () {
-            var date=document.getElementById("date").value;
-            if(date=="") {
-              date = document.getElementById("date").placeholder;
-              console.log("No input entered, assuming today: " + date);
-            }
-            else console.log(`Input submitted: \"${date}\"`);
-            update_weather(date);
+<script id="custom script">
+    document.getElementById("submit_button").onclick = function () {
+        var date = document.getElementById("date").value;
+        if (date == ""){
+            date = document.getElementById("date").placeholder;
+            console.log("No input entered, assuming today: " + date);
         }
-        
+        else console.log(`Input submitted: \"${date}\"`);
+        update_apod(date);
+        update_weather(date);
+    }
+    document.getElementById("date").addEventListener("keyup", function (event){
+        if(event.keyCode === 13) document.getElementById("submit_button").click();
+    })
+    window.onload = function (){
+        var date = document.getElementById("date").value;
+        update_apod(date);
+    }
+  
+    function update_apod(date) {
+        var day = date;
+        console.log(`(APOD request)
+    searching, date: \"${day}\"`);
+        var call = fetch(action = "/api/apod/" + day)
+                .then(request => request.json())
+                .then(function(request){
+                    if ("400, bad request" in request) {
+                        console.log(`(APOD request)
+    Error, can't find date: \"${day}\", aborting..`);
+                        return;
+                    }
+                    console.log(request);
+                    // add image
+                    const img = document.getElementById("apod_pic");
+                    img.src = ("hdurl" in request) ? request["hdurl"] : request["url"];
+                    // add title
+                    const title = document.getElementById("apod_title");
+                    title.innerText = `\"${request["title"]}\"`;
+                    // add copyright (if there is)
+                    const copyright = document.getElementById("apod_copyright");
+                    copyright.innerText = ("copyright" in request) ? request["copyright"] : "NASA";
+                    // add date
+                    const date = document.getElementById("apod_date");
+                    date.innerText = request["date"];
+                    // add explanation
+                    const explanation = document.getElementById("apod_explanation");
+                    explanation.innerText = (request["media_type"] == "image") ? request["explanation"] : `*Unfortunately today's picture is not a picture but a ${request["media_type"]}.*
+    ${request["explanation"]}`;
+                    // add link
+                    const link = document.getElementById("apod_link");
+                    link.href = ("hdurl" in request) ? request["hdurl"] : request["url"];
+                    if (request["media_type"] == "video") link.innerText = "Watch video";
+                    if (request["media_type"] == "image") link.innerText = "View HD";
+                });
+    }
+
         function update_weather (date) {
             var call_weather=fetch(action="api/weather/" + date)
                               .then(request=>request.json())
