@@ -55,13 +55,21 @@ h5.modal-title{
 
 .footerImg{
     padding: 15px;
+    max-width: 100px;;
 }
 
 .footerBackGround{
     background: #333333;
 }
 
+
+.fa-github{
+    margin-left: 15rem;
+
+}
+
 .fa-facebook-square{
+    margin-top: 30px;
     color: #3b5998;
 }
 
