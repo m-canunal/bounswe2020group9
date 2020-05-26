@@ -36,7 +36,7 @@ def get_nasa_apod(date):
 
 def get_nasa_news(date):
     if utils.checkInputFormat(date):
-        if utils.checkDate(date):
+        if utils.checkDate(date) == "valid":
             nasa = get_nasa_apod(date)
             topics = get_topics(date)
             annList = utils.sortByConfidence(topics["annotations"])
@@ -68,7 +68,7 @@ def get_nasa_news(date):
 
 def get_news(date):
     if utils.checkInputFormat(date):
-        if utils.checkDate(date):
+        if utils.checkDate(date) == "valid":
             params = {
                 "q": "",
                 "country": "us",

@@ -51,9 +51,11 @@ def checkDate(dateString):
     date = datetime.datetime(int(dateString[0:4]), int(dateString[5:lastDateIndex]), int(dateString[lastDateIndex+1:]))
     maxDate = datetime.datetime(int(maxDateString[0:4]), int(maxDateString[5:lastMaxIndex]), int(maxDateString[lastMaxIndex + 1:]))
     if date < maxDate:
-        return False
+        return "date too early"
+    elif date > datetime.datetime.now():
+        return "date too late"
     else:
-        return True
+        return "valid"
 
 def getMaxDate():
     time = datetime.datetime.now()
