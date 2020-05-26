@@ -42,6 +42,8 @@ def main_menu():
 def main_menu_old():
     return render_template("menu.html", today = utils.getTodayString())
 
+# will not be used at frontend
+'''
 @app.route("/api")
 @app.route("/api/")
 def get_api_today():
@@ -54,7 +56,7 @@ def get_api_today():
 @app.route("/api/<string:date>")
 def get_api(date):
     return jsonify(bazaar_api.get_api(date))
-
+'''
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
 def api_favorites():
@@ -126,9 +128,13 @@ def apod(date):
 def api_covid():
     return jsonify(api_calls.get_covid(utils.getTodayString()))
 
-
-
-
+	#get covid based on date
+@app.route("/api/covid/<string:date>")
+def api_covid_customDate(date):
+    try:
+        return jsonify(api_calls.get_covid(date))
+    except ValueError:
+        return jsonify({"Invalid date": "Try another date"})
 
 #Get Currency exchange rates for a specific date
 @app.route("/api/currencies/<string:date>")
