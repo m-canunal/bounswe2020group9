@@ -98,8 +98,21 @@ def get_topics(date):
 
     return response.json()
 
+
+#get latest currency rates
+def get_currenciesToday():
+    url = "https://api.exchangeratesapi.io/latest"
+    querystring = {"base":"TRY", "symbols": "USD,GBP,EUR,CAD" }
+    response = requests.request("GET", url, params=querystring)
+    return response.json()
+
+#get currency rates for a specific date
+def get_currencies(date):  # example: "2020-05-19"
+    url = "https://api.exchangeratesapi.io/"+date
+    querystring = {"base":"TRY", "symbols": "USD,GBP,EUR,CAD"}
+    response = requests.request("GET", url, params=querystring)
+    return response.json()
+
 def get_covid(date):
     return covid.getGlobalAndTurkeysDataByDate(date)
-
-
 

@@ -112,6 +112,19 @@ def api_covid():
 
 
 
+#Get Currency exchange rates for a specific date
+@app.route("/api/currencies/<string:date>")
+def api_currencies(date):
+    return jsonify(api_calls.get_currencies(date))
+
+#Get Currency exchange rates for today
+@app.route("/api/currencies/")
+@app.route("/api/currencies")
+def api_currenciesToday():
+    return jsonify(api_calls.get_currenciesToday())
+
+
+
 # Error handlers
 @app.errorhandler(404)
 def not_found(error):
