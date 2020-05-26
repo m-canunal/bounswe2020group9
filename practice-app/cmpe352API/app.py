@@ -124,12 +124,7 @@ def apod(date):
 @app.route("/api/covid")
 @app.route("/api/covid/")
 def api_covid():
-    decrementedDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
-    print(decrementedDate)
-    return jsonify(api_calls.get_covid(decrementedDate))
-
-
-
+    return jsonify(api_calls.get_covid(utils.getTodayString()))
 
 
 

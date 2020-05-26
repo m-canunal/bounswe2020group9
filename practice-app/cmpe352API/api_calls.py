@@ -1,8 +1,10 @@
 # Library imports
-import requests, utils, geocoder
+import requests, utils , geocoder
 
 import covid
 import utils
+
+from datetime import datetime, timedelta
 
 # Custom files' imports
 from flask import jsonify
@@ -134,5 +136,12 @@ def get_weather_today():
 
     
 def get_covid(date):
-    return covid.getGlobalAndTurkeysDataByDate(date)
-
+    desiredDate=datetime.strptime(date, '%Y-%m-%d')
+    #print(desiredDate)
+    if desiredDate<datetime(2020,4,14):
+        desiredDate='2020-04-14'
+    elif desiredDate>=datetime.strptime(utils.getTodayString(),'%Y-%m-%d'):
+        desiredDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=2)).strftime('%Y-%m-%d')
+    else:
+        desiredDate=desiredDate.strftime('%Y-%m-%d')
+    return covid.getGlobalAndTurkeysDataByDate(desiredDate)

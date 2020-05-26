@@ -22,7 +22,7 @@ def getCasesByCountryAndDate(country,date):
 def getAllCountriesByDate(date):
 	fromString=date+"T00:00:00Z"
 	incrementedDate=(datetime.strptime(date, '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
-	print(incrementedDate)
+	#print(incrementedDate)
 	toString=incrementedDate+"T00:00:00Z"
 	params = {
 		"from": fromString,
