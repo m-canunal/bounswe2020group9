@@ -21,7 +21,8 @@ favorites = ["1999-06-21", "2012-09-20", "2017-07-26", "2002-01-17"]
 def get_api(date):
     api = {"favorites": favorites,
         "news" : api_calls.get_news(date),
-        "apod" : api_calls.get_nasa_apod(date)
+        "apod" : api_calls.get_nasa_apod(date),
+        "nasa-news": api_calls.get_nasa_news(date)
         # add more if necessary
     }
     return api
