@@ -26,10 +26,10 @@ class SimpleTest(unittest.TestCase):
         response = api_calls.get_nasa_news(date)
         articleFileds = ["author","content","description","publishedAt","source","title","url","urlToImage"]
         result = True
-        for (keys,fields) in zip(response[0],articleFileds):
+        for (keys,fields) in zip(response,articleFileds):
             if not keys in articleFileds:
                 result=False
-            if not fields in response[0]:
+            if not fields in response:
                 result=False
         self.assertTrue(result,"wrong format")
 
@@ -38,6 +38,7 @@ class SimpleTest(unittest.TestCase):
         response = api_calls.get_news(date)
         articleFileds = ["author","content","description","publishedAt","source","title","url","urlToImage"]
         result = True
+
         for (keys,fields) in zip(response[0],articleFileds):
             if not keys in articleFileds:
                 result=False
@@ -69,7 +70,3 @@ class SimpleTest(unittest.TestCase):
 if(__name__ == "__main__"):
     unittest.main()
 
-# 1 ay 1 gün öncesi fırat
-# ileri tarih fırat
-# input formatı date değil ibrahim
-# output format ibrahim

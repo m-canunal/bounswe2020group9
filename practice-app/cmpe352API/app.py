@@ -78,13 +78,13 @@ def api_context():
     return jsonify(api_calls.get_topics(utils.getTodayString()))
 
 #get news about nasa photo
-@app.route("/api/news/nasa")
-def api_nasa_news():
-    return jsonify(api_calls.get_nasa_news(utils.getTodayString()))
+@app.route("/api/news/nasa/<string:date>")
+def api_nasa_news(date):
+    return jsonify(api_calls.get_nasa_news(date))
 # get news
-@app.route("/api/news")
-def api_news():
-    response = api_calls.get_news(utils.getTodayString())
+@app.route("/api/news/<string:date>")
+def api_news(date):
+    response = api_calls.get_news(date)
     """if type(response[0]) is int:
         if response[0][0] == 0:
             response = "Please give a valid date."

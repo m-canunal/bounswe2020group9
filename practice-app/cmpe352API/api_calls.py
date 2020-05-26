@@ -59,12 +59,12 @@ def get_nasa_news(date):
                 i += 1
             res = response.json()
             if x == 0:
-                res["articles"] = ["No articles about the date specified."]
+                res["articles"] = [["No articles about the date specified."]]
         else:
-            res = {"articles": ["Please give a valid date."]}
+            res = {"articles": [["Please give a valid date."]]}
     else:
-        res ={"articles": ["Wrong input format"]}
-    return res["articles"]
+        res ={"articles": [["Wrong input format"]]}
+    return res["articles"][0]
 
 def get_news(date):
     if utils.checkInputFormat(date):
@@ -85,7 +85,7 @@ def get_news(date):
             res = {"articles": ["Please give a valid date."]}
     else:
         res ={"articles": ["Wrong input format"]}
-    return res["articles"]
+    return res["articles"][0:6]
     
 
 
