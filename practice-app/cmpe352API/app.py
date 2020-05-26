@@ -40,7 +40,6 @@ app = Flask(__name__)
 def main_menu():
     return render_template("menu.html", today = utils.getTodayString())
 
-
 @app.route("/api")
 @app.route("/api/")
 def get_api():
