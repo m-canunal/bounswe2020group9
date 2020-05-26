@@ -43,19 +43,16 @@ def main_menu():
 
 @app.route("/api")
 @app.route("/api/")
-def get_api():
-    if request.args.get("date"):
+def get_api_today():
     # return the api of "YYYY-mm-dd"
-        return jsonify(bazaar_api.get_api(request.args.get("date")))
-    # else return the api of today
-    return jsonify(bazaar_api.get_api(utils.getTodayString()))
+    return get_api(utils.getTodayString())
 
 
-"""
+
 # return the api of "YYYY-mm-dd"
 @app.route("/api/<string:date>")
 def get_api(date):
-    return jsonify(bazaar_api.get_api(date))"""
+    return jsonify(bazaar_api.get_api(date))
 
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
