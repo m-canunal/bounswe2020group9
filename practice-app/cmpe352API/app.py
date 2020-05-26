@@ -42,19 +42,16 @@ def main_menu():
 
 @app.route("/api")
 @app.route("/api/")
-def get_api():
-    if request.args.get("date"):
-    # return the api of "YYYY-mm-dd"
-        return jsonify(bazaar_api.get_api(request.args.get("date")))
-    # else return the api of today
-    return jsonify(bazaar_api.get_api(utils.getTodayString()))
+def get_api_today():
+    # return the api of today
+    return get_api(utils.getTodayString())
 
 
-"""
+
 # return the api of "YYYY-mm-dd"
 @app.route("/api/<string:date>")
 def get_api(date):
-    return jsonify(bazaar_api.get_api(date))"""
+    return jsonify(bazaar_api.get_api(date))
 
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
@@ -86,11 +83,11 @@ def api_nasa_news():
 @app.route("/api/news")
 def api_news():
     response = api_calls.get_news(utils.getTodayString())
-    if type(response[0]) is int:
+    """if type(response[0]) is int:
         if response[0][0] == 0:
             response = "Please give a valid date."
         elif response[0][0] == 2:
-            response = "No articles about the date specified."
+            response = "No articles about the date specified."""
     return jsonify(response)
 
 @app.route("/api/apod")
