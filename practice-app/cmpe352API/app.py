@@ -93,6 +93,7 @@ def api_currencies(date):
 
 #Get Currency exchange rates for today
 @app.route("/api/currencies/")
+@app.route("/api/currencies")
 def api_currenciesToday():
     return jsonify(api_calls.get_currenciesToday())
 
