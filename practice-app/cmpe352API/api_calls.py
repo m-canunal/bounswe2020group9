@@ -59,9 +59,9 @@ def get_nasa_news(date):
             i += 1
         res = response.json()
         if x == 0:
-            res["articles"] = [2]
+            res["articles"] = ["No articles about the date specified."]
     else:
-        res = {"articles": [0]}
+        res = {"articles": ["Please give a valid date."]}
     return res["articles"]
 
 def get_news(date):
@@ -79,7 +79,7 @@ def get_news(date):
         )
         res = response.json()
     else:
-        res = {"articles": [0]}
+        res = {"articles": ["Please give a valid date."]}
     return res["articles"]
     
 
