@@ -46,6 +46,16 @@ class SimpleTest(unittest.TestCase):
                 result=False
         self.assertTrue(result,"wrong format")
 
+def test_forward_date_weather(self):
+        date = "2022-08-18"
+        response = api_calls.get_weather(date)
+        self.assertEqual(response[0], "Please give a valid date.", "Late date control failed")
+
+def test_forward_date_weather_today(self):
+        date = "2022-08-18"
+        response = api_calls.get_weather_today(date)
+        self.assertEqual(response[0], "Please give a valid date.", "Late date nasa control failed")
+
 
 
 if(__name__ == "__main__"):
