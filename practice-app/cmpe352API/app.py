@@ -17,22 +17,21 @@ app = Flask(__name__)
 
 # frontend route list:
 # / : homepage
+# /favicon.ico : icon of homepage
 
 
 # backend route list:
 
 # /api : return today, everything
 # /api/ : return today, everything
-# /api<string:date> : return date, everything
 # /api/<string:date> : return date, everything
 
 # /api{X_API} : return today, X_API
 # /api/{X_API} : return today, X_API
-# /api/{X_API}<string:date> : return date, X_API
 # /api/{X_API}/<string:date> : return date, X_API
 
 # /api/favorites : return favorites
-# (everything above is GET requests)
+# (everything above are GET requests)
 # /api/favorites/add : POST request to favorites, <string:body> will be stored in the array
 # /api/favorites/remove : DELETE request to favorites, <string:body> will be deleted if in the array
 
@@ -43,6 +42,7 @@ def main_menu():
 
 
 @app.route("/api")
+@app.route("/api/")
 def get_api():
     if request.args.get("date"):
     # return the api of "YYYY-mm-dd"
@@ -94,6 +94,7 @@ def api_news():
             response = "No articles about the date specified."
     return jsonify(response)
 
+@app.route("/api/apod")
 @app.route("/api/apod/")
 def api_apod_today():
     # return the api of today
@@ -103,6 +104,8 @@ def api_apod(date):
     # return the api of date
     return jsonify(api_calls.get_nasa_apod(date))
 
+# delete this later, will not be needed in release
+@app.route("/apod")
 @app.route("/apod/")
 def apod_today():
     # View the Astronomy Picture of the Day: <Today>
@@ -121,6 +124,7 @@ def apod(date):
 
 # get covid
 @app.route("/api/covid")
+@app.route("/api/covid/")
 def api_covid():
     decrementedDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
     print(decrementedDate)
