@@ -4,6 +4,12 @@
     text-align: center;
 }
 
+.sectionDark .newsslide {
+
+    max-width: 3px;
+
+}
+
 
 .jumbotron {
     background: none;

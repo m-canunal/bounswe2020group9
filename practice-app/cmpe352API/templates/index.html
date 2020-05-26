@@ -3846,19 +3846,17 @@ html {
                 </div>
             </div>
             <div class="row" style="text-align: center" >
-                <div class="col-sm-12">
-                    <form action="/action_page.html">  <!--action must be changed... more info on https://stackoverflow.com/questions/16660734/html-form-with-multiple-actions-->
-                        <label for="date">Enter a date:</label><br>
-                        <input type="text" id="date" name="date"><br><br>
-                        <input type="submit" value="Submit">
-                    </form> 
+                <div class="col-sm-12"> <!--action must be changed... more info on https://stackoverflow.com/questions/16660734/html-form-with-multiple-actions-->
+                    <label for="date">Enter a date:</label><br>
+                    <input type="text" id="date" name="date" placeholder="{{today}}"><br><br>
+                    <input id="submit_button" type="submit" value="Submit">
                 </div>
             </div>
-            
         </div>
         <!--   Section Two        -->
 
 
+            </div>
 
         <!--   This part is for NASA API        -->
 
@@ -3900,20 +3898,31 @@ html {
 
         <div class="sectionDark">
             
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-12 newsslide" >
                     <div id="mainCarousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="assets/board.jpg" class="d-block w-100" alt="...">
+
+
+                            <div id = "news0" class="carousel-item active">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(0)" width = "150px">
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/tipsolahraga.jpg" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
+                            <div id = "news1" class="carousel-item">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(1)">
                             </div>
-                            <div class="carousel-item">
-                                <img src="assets/longboard.jpg" class="d-block w-100" alt="...">
+                            <div id = "news2" class="carousel-item">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(2)">
                             </div>
+                            <div id = "news3" class="carousel-item">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(3)">
+                            </div>
+                            <div id = "news4" class="carousel-item">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(4)">
+                            </div>
+                            <div id = "news5" class="carousel-item">
+                                <img src="https://assets.startribune.com/static/img/branding/logos/strib-social-card.png?d=1578604622" class="d-block w-100" alt="..." onclick = "myfunction(5)">
+                            </div>
+
+
                         </div>
                         <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -4132,6 +4141,64 @@ html {
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+    <script>
+        document.getElementById("submit_button").onclick = function () {
+            var date = document.getElementById("date").value;
+            if (date == "") {
+                date = document.getElementById("date").placeholder;
+                console.log("No input entered, assuming today: " + date);
+            } else console.log(`Input submitted: \"${date}\"`);
+
+            update_news(date);
+        }
+
+        var urlList = [];
+
+    window.onload = function (){
+        var date = document.getElementById("date").value;
+        update_news(date);
+    }
+
+        function update_news(date){
+            var call = fetch(action = "/api/news/"+date)
+                .then(request => request.json())
+                .then(function(request){
+                    console.log(request);
+
+                    urlList = [];
+
+                    for (var i=0; i<6;i++){
+                        var img = request[i]["urlToImage"];
+                        var url = request[i]["url"];
+                        var news = document.getElementById("news"+i).getElementsByTagName("img")[0];
+                        news.src = img;
+
+                        urlList.push(url);
+
+                    }
+
+                    console.log(urlList);
+
+
+            });
+
+        }
+
+        function myfunction(count){
+            window.open(urlList[count]);
+        }
+
+
+    </script>
 </body>
 
 </html>
+
+
