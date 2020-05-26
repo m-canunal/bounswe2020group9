@@ -3846,10 +3846,10 @@ html {
                 </div>
             </div>
             <div class="row" style="text-align: center" >
-                <div class="col-sm-12"> <!--action must be changed... more info on https://stackoverflow.com/questions/16660734/html-form-with-multiple-actions-->
-                    <label for="date">Enter a date:</label><br>
-                    <input type="text" id="date" name="date" placeholder="{{today}}"><br><br>
-                    <input id="submit_button" type="submit" value="Submit">
+                <div class="col-sm-12">
+                        <label for="date">Enter a date:</label><br>
+                        <input type="text" id="date" name="date"><br><br>
+                        <input type="submit" id="submit_button" name="submit_button" value="Submit">
                 </div>
             </div>
             
@@ -3935,35 +3935,38 @@ html {
         
         <!--   This Part is for Weather API        -->
         <div class="sectionDark">
-            <div class="row">
-                <div class="col-sm-12 col-md-1 offset-md-2">
-                    <img class="img-fluid" src="assets/prodigy.png">
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-9">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="col-sm-12 col-md-3">
-                            <img class="img-fluid" src="assets/KFS.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="col"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="coolStuffWrapper">
-                        <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div class="row">
+              <div class="myImage">
+                  <img class="img-fluid" src="https://dv-website.s3.amazonaws.com/uploads/2019/05/jz_csweather_060619.jpg">
+              </div>
+              <div class="col-sm-12 col-md-6">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <h1>Weather<br></h1>
+
+                          <h4>Location:</h4> 
+                          <p id="weather_location">Istanbul,TR</p>
+
+                          <h4>Date:</h4> 
+                          <p id="weather_date">2020-05-25</p>
+                          <br>
+                          <h5>Weather:</h5> 
+                          <p id="weather_description">Partly cloudy</p>
+                          <h5>Highest temperature:</h5> 
+                          <p id="weather_high_temp">65℉</p>
+                          <h5>Lowest temperature:</h5> 
+                          <p id="weather_low_temp">57℉</p>
+                          <h5>Precipitation:</h5> 
+                          <p id="weather_precip">0%</p>
+                          <h5>Wind:</h5> 
+                          <p id="weather_wind">13 mph</p>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="col"></div>
+          </div>
+      </div>
         
 
         <!--   This Part is for COVID-19 Tracking API        -->
@@ -4129,6 +4132,7 @@ html {
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 <script id="custom script">
     document.getElementById("submit_button").onclick = function () {
         var date = document.getElementById("date").value;
@@ -4138,7 +4142,16 @@ html {
         }
         else console.log(`Input submitted: \"${date}\"`);
         update_apod(date);
+        update_weather(date);
     }
+    document.getElementById("date").addEventListener("keyup", function (event){
+        if(event.keyCode === 13) document.getElementById("submit_button").click();
+    })
+    window.onload = function (){
+        var date = document.getElementById("date").value;
+        update_apod(date);
+    }
+  
     function update_apod(date) {
         var day = date;
         console.log(`(APOD request)
@@ -4175,15 +4188,24 @@ html {
                     if (request["media_type"] == "image") link.innerText = "View HD";
                 });
     }
-    document.getElementById("date").addEventListener("keyup", function (event){
-        if(event.keyCode === 13) document.getElementById("submit_button").click();
-    })
-    window.onload = function (){
-        var date = document.getElementById("date").value;
-        update_apod(date);
-    }
 
-</script>
+        function update_weather (date) {
+            var call_weather=fetch(action="api/weather/" + date)
+                              .then(request=>request.json())
+                              .then(function(request){
+                                console.log(request);
+                                var jsonkeys = Object.keys(request.locations);
+                                var location = jsonkeys[0];
+                                document.getElementById("weather_location").innerText = location;
+                                document.getElementById("weather_date").innerText = date;
+                                document.getElementById("weather_description").innerText = request.locations[location].values[0].conditions;
+                                document.getElementById("weather_high_temp").innerText = request.locations[location].values[0].maxt + "℉";
+                                document.getElementById("weather_low_temp").innerText = request.locations[location].values[0].mint + "℉";
+                                document.getElementById("weather_precip").innerText = request.locations[location].values[0].precip + " %";
+                                document.getElementById("weather_wind").innerText = request.locations[location].values[0].wspd + " mph";
+                              });
+        }
+    </script>
 </body>
 
 </html>
