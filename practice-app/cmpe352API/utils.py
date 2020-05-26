@@ -12,7 +12,7 @@ import datetime
 def getTodayString():
     # Returns today as a string in "YYYY-mm-dd" format
     # Used multiple times in api_calls
-    date = datetime.datetime.now();
+    date = datetime.datetime.now()
     if (date.month<10):
         return str(date.year) + "-0" + str(date.month) + "-" + str(date.day)
     return str(date.year) + "-" + str(date.month)+ "-" + str(date.day)
@@ -28,6 +28,21 @@ def getFreeID(dictionary):
     while key in dict.keys(dictionary):
         key += 1
     return key
+
+def checkInputFormat(date):
+    if len(date) == 10:
+        year = date[0:4]
+        char1 = date[4]
+        month = date[5:7]
+        char2 = date[7]
+        day = date[8:]
+        if (year.isnumeric()) and (char1 =="-") and (month.isnumeric()) and (char2 =="-") and (day.isnumeric()) :
+            return True
+        else:
+            return False
+    else:
+        return False
+
 
 def checkDate(dateString):
     maxDateString = getMaxDate()
