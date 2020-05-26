@@ -43,7 +43,6 @@ def checkInputFormat(date):
     else:
         return False
 
-
 def checkDate(dateString):
     maxDateString = getMaxDate()
     lastMaxIndex = maxDateString.rfind('-')
