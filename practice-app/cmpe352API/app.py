@@ -15,6 +15,27 @@ import api_calls, utils, bazaar_api
 
 app = Flask(__name__)
 
+# frontend route list:
+# / : homepage
+
+
+# backend route list:
+
+# /api : return today, everything
+# /api/ : return today, everything
+# /api<string:date> : return date, everything
+# /api/<string:date> : return date, everything
+
+# /api{X_API} : return today, X_API
+# /api/{X_API} : return today, X_API
+# /api/{X_API}<string:date> : return date, X_API
+# /api/{X_API}/<string:date> : return date, X_API
+
+# /api/favorites : return favorites
+# (everything above is GET requests)
+# /api/favorites/add : POST request to favorites, <string:body> will be stored in the array
+# /api/favorites/remove : DELETE request to favorites, <string:body> will be deleted if in the array
+
 
 @app.route("/")
 def main_menu():
