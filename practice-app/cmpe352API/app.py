@@ -6,7 +6,7 @@ import api_calls, utils, bazaar_api
 
 # Custom files that we wrote from scratch:
 # app.py, api_calls.py, sandbox.py, utils.py, bazaar_api
-# Each file has it's description in its
+# Each file has it's description in it
 
 # app.py:
 # This page includes the possible routes for the flask app
@@ -44,6 +44,7 @@ def api_favorites():
 def api_favorites_post():
     # request.json is the json object user has given to us
     return jsonify(bazaar_api.favorites_post(request.json))
+
 
 # delete favorite<id>
 @app.route("/api/favorites/remove", methods=["DELETE"])
