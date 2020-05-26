@@ -13,7 +13,7 @@ import api_calls, utils, bazaar_api
 # This page includes the possible routes for the flask app
 # Note that main function is in app.py
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 
 # frontend route list:
 # / : homepage
@@ -35,9 +35,11 @@ app = Flask(__name__)
 # /api/favorites/add : POST request to favorites, <string:body> will be stored in the array
 # /api/favorites/remove : DELETE request to favorites, <string:body> will be deleted if in the array
 
-
 @app.route("/")
 def main_menu():
+    return render_template("index.html", today = utils.getTodayString())
+@app.route("/old")
+def main_menu_old():
     return render_template("menu.html", today = utils.getTodayString())
 
 @app.route("/api")
