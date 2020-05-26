@@ -44,7 +44,7 @@ def main_menu():
 @app.route("/api")
 @app.route("/api/")
 def get_api_today():
-    # return the api of "YYYY-mm-dd"
+    # return the api of today
     return get_api(utils.getTodayString())
 
 
