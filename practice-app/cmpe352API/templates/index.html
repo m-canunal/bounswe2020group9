@@ -3825,7 +3825,6 @@ html {
     </style>
 
 
-    <link rel="stylesheet" href="main.css">
     <!--  CSS  -->
 </head>
 
@@ -3848,7 +3847,7 @@ html {
             <div class="row" style="text-align: center" >
                 <div class="col-sm-12">
                         <label for="date">Enter a date:</label><br>
-                        <input type="text" id="date" name="date"><br><br>
+                        <input type="text" id="date" name="date" placeholder="{{today}}"><br><br>
                         <input type="submit" id="submit_button" name="submit_button" value="Submit">
                 </div>
             </div>
@@ -3901,15 +3900,15 @@ html {
                     <div id="mainCarousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="assets/board.jpg" class="d-block w-100" alt="...">
+                                <img class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/tipsolahraga.jpg" class="d-block w-100" alt="...">
+                                <img class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/longboard.jpg" class="d-block w-100" alt="...">
+                                <img class="d-block w-100" alt="...">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
@@ -3973,7 +3972,7 @@ html {
         <div class="sectionDark">
             <div class="row">
                 <div class="col-sm-12 col-md-1 offset-md-2">
-                    <img class="img-fluid" src="assets/prodigy.png">
+                    <img class="img-fluid" >
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="row">
@@ -3986,7 +3985,7 @@ html {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </div>
                         <div class="col-sm-12 col-md-3">
-                            <img class="img-fluid" src="assets/KFS.png">
+                            <img class="img-fluid" >
                         </div>
                     </div>
                 </div>
@@ -4007,7 +4006,7 @@ html {
         <div class="sectionDark">
             <div class="row">
                 <div class="col-sm-12 col-md-1 offset-md-2">
-                    <img class="img-fluid" src="assets/prodigy.png">
+                    <img class="img-fluid">
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="row">
@@ -4020,7 +4019,7 @@ html {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </div>
                         <div class="col-sm-12 col-md-3">
-                            <img class="img-fluid" src="assets/KFS.png">
+                            <img class="img-fluid" >
                         </div>
                     </div>
                 </div>
@@ -4052,7 +4051,7 @@ html {
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <img class="img-fluid" src="assets/KFS_modal.png">
+                                    <img class="img-fluid">
                                 </div>
                             </div>
                             <div class="row">
@@ -4114,7 +4113,7 @@ html {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 col-lg-3">
-                    <img class="img-fluid size footerImg" src="assets/bazaar-4.png">
+                    <img class="img-fluid size footerImg" >
                 </div>
                 <div class="col-sm-12 col-lg-9 socialWrapper">
                     <a href="https://github.com/bounswe/bounswe2020group9" target="_blank"> <i class="fa fa-github fa-3x" aria-hidden="true"></i></a>
@@ -4149,7 +4148,9 @@ html {
     })
     window.onload = function (){
         var date = document.getElementById("date").value;
+        if (date == "") date = document.getElementById("date").placeholder;
         update_apod(date);
+        update_weather(date);
     }
   
     function update_apod(date) {
