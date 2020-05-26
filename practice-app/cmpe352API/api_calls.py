@@ -46,16 +46,16 @@ def get_news(date):
     )
     return response.json()
 
-def get_currencies(date):
-    url = "https://currency-exchange.p.rapidapi.com/exchange"
+#get latest currency rates
+def get_currenciesToday():
+    url = "https://api.exchangeratesapi.io/latest"
+    querystring = {"base":"TRY", "symbols": "USD,GBP,EUR,CAD" }
+    response = requests.request("GET", url, params=querystring)
+    return response.json()
 
-    querystring = {"q":"1.0","from":"SGD","to":"MYR"}
-
-    headers = {
-        'x-rapidapi-host': "currency-exchange.p.rapidapi.com",
-        'x-rapidapi-key': "c94c624004msh01721a04d9bbbf2p1b6835jsnbe9e5824019f"
-        }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-
-    return response.text
+#get currency rates for a specific date
+def get_currencies(date):  # example: "2020-05-19"
+    url = "https://api.exchangeratesapi.io/"+date
+    querystring = {"base":"TRY", "symbols": "USD,GBP,EUR,CAD"}
+    response = requests.request("GET", url, params=querystring)
+    return response.json()

@@ -85,9 +85,17 @@ def apod_today():
         url = apodJson["hdurl"]
     return render_template("apod.html", url=apodJson["url"])
 
-@app.route("/api/currencies/<string:date>")  # if methods is not given, default is ["GET"]
+
+#Get Currency exchange rates for a specific date
+@app.route("/api/currencies/<string:date>")
 def api_currencies(date):
     return jsonify(api_calls.get_currencies(date))
+
+#Get Currency exchange rates for today
+@app.route("/api/currencies/")
+def api_currenciesToday():
+    return jsonify(api_calls.get_currenciesToday())
+
 
 
 # Error handlers
