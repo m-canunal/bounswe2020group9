@@ -146,6 +146,12 @@ def api_currencies(date):
 def api_currenciesToday():
     return jsonify(api_calls.get_currenciesToday())
 
+# get weather api page
+@app.route("/api/weather")
+@app.route("/api/weather/")
+def api_weather():
+    return jsonify(api_calls.get_weather_today())
+
 
 # Return the fetched weather json, day: <string:date>
 @app.route("/api/weather/<string:date>")
