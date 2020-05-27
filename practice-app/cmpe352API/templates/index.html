@@ -4279,6 +4279,7 @@ html {
                                 .then(function(request){
                                 console.log(request);
 
+                                document.getElementById("currency_date").innerText = date;
                                 var rates = request["rates"];
                                 document.getElementById("usd").innerText = rates["USD"];
                                 document.getElementById("eur").innerText = rates["EUR"];
