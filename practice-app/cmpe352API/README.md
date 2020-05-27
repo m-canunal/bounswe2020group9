@@ -1,7 +1,7 @@
 # Bazaar API Center # 
 ##  The Documentation ##
 
-##**Base URL = http://127.0.0.1:5000/**
+## **Base URL = http://127.0.0.1:5000/**
 
 
 ## Getting Covid Results By Date
@@ -339,3 +339,27 @@ Takes date as input and returns the top news article about the NASA picture of t
     "url": "https://www.wired.com/story/space-photos-keeping-an-eye-on-jupiters-storms/",
     "urlToImage": "https://media.wired.com/photos/5ec85271448999d7ae47db3f/191:100/w_1280,c_limit/photo_space_juno_2_PIA21972.jpg"
 }
+
+
+## Getting Currency Rates for Date
+
+Takes date as input and returns the currency rates for specific date.
+
+### URL: "/api/currencies/
+### Method: GET
+### Parameters:/{{date}}
+
+### Response:
+#### URL:http://127.0.0.1:5000/api/currencies/2020-05-13
+
+{
+"base": "TRY",
+"date": "2020-05-13",
+"rates": {
+"CAD": 0.2009332859,
+"EUR": 0.1318200393,
+"GBP": 0.1163245937,
+"USD": 0.1433542927
+}
+}
+
