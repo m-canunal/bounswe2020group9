@@ -88,7 +88,7 @@ def get_news(date):
     res2 = []
     i=0
     while len(res2) !=6:
-        if res["articles"][i]["urlToImage"] != "null":
+        if res["articles"][i]["urlToImage"] != None:
             res2.append(res["articles"][i])
         i+=1
     return res2

@@ -3825,9 +3825,13 @@ html {
     </style>
 
     <style id = "main">
-        .carousel-inner .mycarousel{
-            margin-left : "300px";
+        .imageCarousel{
+        display: block;
+        align-content: center;
+        text-align: center;
+        align-items: center;
         }
+
     </style>
 
     <link rel="stylesheet" href="main.css">
@@ -3897,33 +3901,46 @@ html {
         </div>
 
 
-
-
         <!--   This Part is for News API       -->
 
-        <div class="sectionDark">
-            
-            <div class="col-sm-12 col-md-12 newsslide" >
-                    <div id="mainCarousel" class="carousel slide " data-ride="carousel">
+        <div class="sectionDark imageCarousel">
+
+            <div class="col-sm-12 col-md-12 imageCarousel" >
+
+                <h4>Tech News of the Day:</h4>
+                <p id = "newsDate" > </p>
+                    <div id="mainCarousel" class="carousel slide imageCarousel" data-ride="carousel">
                         <div class="carousel-inner mycarousel" >
 
                             <div id = "news0" class="carousel-item active">
-                                <img src="" alt="..." onclick = "myfunction(0)" width = "250px" height = "250px">
+                                <p> 1. Story </p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(0)" width = "250px" height = "250px">
+                                <p id = "newstitle0" onclick = "myfunction(0)" ></p>
                             </div>
                             <div id = "news1" class="carousel-item">
-                                <img src="" alt="..." onclick = "myfunction(1)" width = "250px" height = "250px">
+                                <p> 2. Story</p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(1)" width = "250px" height = "250px">
+                                <p id = "newstitle1"  onclick = "myfunction(1)" > </p>
                             </div>
                             <div id = "news2" class="carousel-item">
-                                <img src="" alt="..." onclick = "myfunction(2)" width = "250px" height = "250px">
+                                <p> 3. Story</p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(2)" width = "250px" height = "250px">
+                                <p id = "newstitle2" onclick = "myfunction(2)" > </p>
                             </div>
                             <div id = "news3" class="carousel-item">
-                                <img src="" alt="..." onclick = "myfunction(3)" width = "250px" height = "250px">
+                                <p> 4. Story</p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(3)" width = "250px" height = "250px">                        <p ></p>
+                                <p id = "newstitle3" onclick = "myfunction(3)" > </p>
                             </div>
                             <div id = "news4" class="carousel-item">
-                                <img src="" alt="..." onclick = "myfunction(4)" width = "250px" height = "250px">
+                                <p> 5. Story</p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(4)" width = "250px" height = "250px">
+                                <p id = "newstitle4" onclick = "myfunction(4)" > </p>
                             </div>
                             <div id = "news5" class="carousel-item">
-                                <img src="" alt="..." onclick = "myfunction(5)" width = "250px" height = "250px">
+                                <p> 6. Story</p>
+                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(5)" width = "250px" height = "250px">
+                                <p id = "newstitle5" onclick = "myfunction(5)" > </p>
                             </div>
 
                         </div>
@@ -3937,14 +3954,7 @@ html {
                         </a>
                     </div>
                 </div>
-            
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="coolStuffWrapper">
-                        <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
-                    </div>
-                </div>
-            </div>
+
         </div>
         
         
@@ -4160,27 +4170,34 @@ html {
             } else console.log(`Input submitted: \"${date}\"`);
 
             update_news(date);
+
         }
 
         var urlList = [];
 
     window.onload = function (){
         var date = document.getElementById("date").value;
+        if (date == "") date = document.getElementById("date").placeholder;
         update_news(date);
     }
+
 
         function update_news(date){
             var call = fetch(action = "/api/news/"+date)
                 .then(request => request.json())
                 .then(function(request){
                     console.log(request);
-
+                    var newsdate = document.getElementById("newsDate");
+                    newsdate.innerText = date;
                     urlList = [];
 
                     for (var i=0; i<6;i++){
                         var img = request[i]["urlToImage"];
                         var url = request[i]["url"];
+                        var title = request[i]["title"];
                         var news = document.getElementById("news"+i).getElementsByTagName("img")[0];
+                        var newstitle = document.getElementById("newstitle"+i);
+                        newstitle.innerText = title;
                         news.src = img;
 
                         urlList.push(url);
