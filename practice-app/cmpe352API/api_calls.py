@@ -2,6 +2,7 @@
 import requests, utils, geocoder
 
 import covid
+import utils
 
 # Custom files' imports
 from flask import jsonify
