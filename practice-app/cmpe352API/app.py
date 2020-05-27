@@ -42,6 +42,8 @@ def main_menu():
 def main_menu_old():
     return render_template("menu.html", today = utils.getTodayString())
 
+# will not be used at frontend
+'''
 @app.route("/api")
 @app.route("/api/")
 def get_api_today():
@@ -54,7 +56,7 @@ def get_api_today():
 @app.route("/api/<string:date>")
 def get_api(date):
     return jsonify(bazaar_api.get_api(date))
-
+'''
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
 def api_favorites():
@@ -78,13 +80,13 @@ def api_context():
     return jsonify(api_calls.get_topics(utils.getTodayString()))
 
 #get news about nasa photo
-@app.route("/api/news/nasa")
-def api_nasa_news():
-    return jsonify(api_calls.get_nasa_news(utils.getTodayString()))
+@app.route("/api/news/nasa/<string:date>")
+def api_nasa_news(date):
+    return jsonify(api_calls.get_nasa_news(date))
 # get news
-@app.route("/api/news")
-def api_news():
-    response = api_calls.get_news(utils.getTodayString())
+@app.route("/api/news/<string:date>")
+def api_news(date):
+    response = api_calls.get_news(date)
     """if type(response[0]) is int:
         if response[0][0] == 0:
             response = "Please give a valid date."
@@ -128,12 +130,41 @@ def api_covid():
     print(decrementedDate)
     return jsonify(api_calls.get_covid(decrementedDate))
 
+	#get covid based on date
+@app.route("/api/covid/<string:date>")
+def api_covid_customDate(date):
+    try:
+        return jsonify(api_calls.get_covid(date))
+    except ValueError:
+        return jsonify({"Invalid date": "Try another date"})
+
+#Get Currency exchange rates for a specific date
+@app.route("/api/currencies/<string:date>")
+def api_currencies(date):
+    return jsonify(api_calls.get_currencies(date))
+
+#Get Currency exchange rates for today
+@app.route("/api/currencies/")
+@app.route("/api/currencies")
+def api_currenciesToday():
+    return jsonify(api_calls.get_currenciesToday())
+
+# get weather api page
+@app.route("/api/weather")
+@app.route("/api/weather/")
+def api_weather():
+    return jsonify(api_calls.get_weather_today())
 
 
+# Return the fetched weather json, day: <string:date>
+@app.route("/api/weather/<string:date>")
+def weather(date):
+    return jsonify(api_calls.get_weather(date))
 
-
-
-
+# Return the fetched weather json, day: today
+@app.route("/api/weather/today")
+def weather_today():
+    return jsonify(api_calls.get_weather_today())
 
 #Get Currency exchange rates for a specific date
 @app.route("/api/currencies/<string:date>")
