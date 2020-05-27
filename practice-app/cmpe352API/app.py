@@ -138,10 +138,6 @@ def api_covid_customDate(date):
     except ValueError:
         return jsonify({"Invalid date": "Try another date"})
 
-#Get Currency exchange rates for a specific date
-@app.route("/api/currencies/<string:date>")
-def api_currencies(date):
-    return jsonify(api_calls.get_currencies(date))
 
 #Get Currency exchange rates for today
 @app.route("/api/currencies/")
@@ -170,23 +166,6 @@ def weather_today():
 @app.route("/api/currencies/<string:date>")
 def api_currencies(date):
     return jsonify(api_calls.get_currencies(date))
-
-#Get Currency exchange rates for today
-@app.route("/api/currencies/")
-@app.route("/api/currencies")
-def api_currenciesToday():
-    return jsonify(api_calls.get_currenciesToday())
-
-
-# Return the fetched weather json, day: <string:date>
-@app.route("/api/weather/<string:date>")
-def weather(date):
-    return jsonify(api_calls.get_weather(date))
-
-# Return the fetched weather json, day: today
-@app.route("/api/weather/today")
-def weather_today():
-    return jsonify(api_calls.get_weather_today())
 
 # Error handlers
 @app.errorhandler(404)
