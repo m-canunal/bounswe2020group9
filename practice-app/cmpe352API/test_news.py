@@ -9,7 +9,7 @@ class SimpleTest(unittest.TestCase):
     def test_early_date_news(self):
         date = "2019-03-17"
         response = api_calls.get_news(date)
-        self.assertEqual(response[0],"Please give a valid date.","Early date control failed")
+        self.assertEqual(response[0],"Please give a valid date1.","Early date control failed")
 
     def test_input_format_nasa(self):
         date = "1234567890"
@@ -49,7 +49,7 @@ class SimpleTest(unittest.TestCase):
     def test_recent_date_news(self):
         date = "2020-04-24"
         response = api_calls.get_news(date)
-        self.assertEqual(response[0], "Please give a valid date.", "Early day control failed")
+        self.assertEqual(response[0], "Please give a valid date1.", "Early day control failed")
 
     def test_recent_date_nasa(self):
         date = "2020-04-24"
@@ -59,7 +59,7 @@ class SimpleTest(unittest.TestCase):
     def test_forward_date_news(self):
         date = "2022-07-17"
         response = api_calls.get_news(date)
-        self.assertEqual(response[0], "Please give a valid date.", "Late date control failed")
+        self.assertEqual(response[0], "Please give a valid date2.", "Late date control failed")
 
     def test_forward_date_nasa(self):
         date = "2022-07-17"

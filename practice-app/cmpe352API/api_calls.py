@@ -81,10 +81,12 @@ def get_news(date):
                 params=params
             )
             res = response.json()
+        elif utils.checkDate(date)== "date too early":
+            return ["Please give a valid date1."]
         else:
-            return {"articles": ["Please give a valid date."]}
+            return  ["Please give a valid date2."]
     else:
-        return {"articles": ["Wrong input format"]}
+        return ["Wrong input format"]
     res2 = []
     i=0
     while len(res2) !=6:
