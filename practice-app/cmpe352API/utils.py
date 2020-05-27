@@ -12,7 +12,7 @@ import datetime
 def getTodayString():
     # Returns today as a string in "YYYY-mm-dd" format
     # Used multiple times in api_calls
-    date = datetime.datetime.now();
+    date = datetime.datetime.now()
     if (date.month<10):
         return str(date.year) + "-0" + str(date.month) + "-" + str(date.day)
     return str(date.year) + "-" + str(date.month)+ "-" + str(date.day)
@@ -29,6 +29,20 @@ def getFreeID(dictionary):
         key += 1
     return key
 
+def checkInputFormat(date):
+    if len(date) == 10:
+        year = date[0:4]
+        char1 = date[4]
+        month = date[5:7]
+        char2 = date[7]
+        day = date[8:]
+        if (year.isnumeric()) and (char1 =="-") and (month.isnumeric()) and (char2 =="-") and (day.isnumeric()) :
+            return True
+        else:
+            return False
+    else:
+        return False
+
 def checkDate(dateString):
     maxDateString = getMaxDate()
     lastMaxIndex = maxDateString.rfind('-')
@@ -36,9 +50,11 @@ def checkDate(dateString):
     date = datetime.datetime(int(dateString[0:4]), int(dateString[5:lastDateIndex]), int(dateString[lastDateIndex+1:]))
     maxDate = datetime.datetime(int(maxDateString[0:4]), int(maxDateString[5:lastMaxIndex]), int(maxDateString[lastMaxIndex + 1:]))
     if date < maxDate:
-        return False
+        return "date too early"
+    elif date > datetime.datetime.now():
+        return "date too late"
     else:
-        return True
+        return "valid"
 
 def getMaxDate():
     time = datetime.datetime.now()

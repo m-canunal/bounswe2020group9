@@ -112,6 +112,10 @@
     </div>
 
     <script>
+        function news(){
+
+        }
+        
         function listFavs(){
             const favs = document.getElementById("favs");
             // Delete all old values
@@ -221,6 +225,7 @@
                     explanation.innerText = request["explanation"];
                     // Delete all old values
                     reset(body);
+                    // Append new values
                     append(body,title);
                     append(body,img);
                     append(body,explanation);
@@ -230,7 +235,7 @@
             var date = document.getElementById("date").value;
             var body = document.getElementById("body");
             console.log(`search: \"${date}\"`);
-            var call = fetch(action="/api/apod/" +date)
+            var call = fetch(action="/api/apod/" + date)
                 .then(request => request.json())
                 .then(function(request){
                     console.log(request);

@@ -13,28 +13,47 @@ import api_calls, utils, bazaar_api
 # This page includes the possible routes for the flask app
 # Note that main function is in app.py
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 
+# frontend route list:
+# / : homepage
+# /favicon.ico : icon of homepage
+
+
+# backend route list:
+
+# /api : return today, everything
+# /api/ : return today, everything
+# /api/<string:date> : return date, everything
+
+# /api{X_API} : return today, X_API
+# /api/{X_API} : return today, X_API
+# /api/{X_API}/<string:date> : return date, X_API
+
+# /api/favorites : return favorites
+# (everything above are GET requests)
+# /api/favorites/add : POST request to favorites, <string:body> will be stored in the array
+# /api/favorites/remove : DELETE request to favorites, <string:body> will be deleted if in the array
 
 @app.route("/")
 def main_menu():
+    return render_template("index.html", today = utils.getTodayString())
+@app.route("/old")
+def main_menu_old():
     return render_template("menu.html", today = utils.getTodayString())
 
-
 @app.route("/api")
-def get_api():
-    if request.args.get("date"):
-    # return the api of "YYYY-mm-dd"
-        return jsonify(bazaar_api.get_api(request.args.get("date")))
-    # else return the api of today
-    return jsonify(bazaar_api.get_api(utils.getTodayString()))
+@app.route("/api/")
+def get_api_today():
+    # return the api of today
+    return get_api(utils.getTodayString())
 
 
-"""
+
 # return the api of "YYYY-mm-dd"
 @app.route("/api/<string:date>")
 def get_api(date):
-    return jsonify(bazaar_api.get_api(date))"""
+    return jsonify(bazaar_api.get_api(date))
 
 # return favorites
 @app.route("/api/favorites")  # if methods is not given, default is ["GET"]
@@ -66,13 +85,14 @@ def api_nasa_news():
 @app.route("/api/news")
 def api_news():
     response = api_calls.get_news(utils.getTodayString())
-    if type(response[0]) is int:
+    """if type(response[0]) is int:
         if response[0][0] == 0:
             response = "Please give a valid date."
         elif response[0][0] == 2:
-            response = "No articles about the date specified."
+            response = "No articles about the date specified."""
     return jsonify(response)
 
+@app.route("/api/apod")
 @app.route("/api/apod/")
 def api_apod_today():
     # return the api of today
@@ -82,6 +102,8 @@ def api_apod(date):
     # return the api of date
     return jsonify(api_calls.get_nasa_apod(date))
 
+# delete this later, will not be needed in release
+@app.route("/apod")
 @app.route("/apod/")
 def apod_today():
     # View the Astronomy Picture of the Day: <Today>
@@ -100,6 +122,7 @@ def apod(date):
 
 # get covid
 @app.route("/api/covid")
+@app.route("/api/covid/")
 def api_covid():
     decrementedDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
     print(decrementedDate)
@@ -111,6 +134,28 @@ def api_covid():
 
 
 
+
+#Get Currency exchange rates for a specific date
+@app.route("/api/currencies/<string:date>")
+def api_currencies(date):
+    return jsonify(api_calls.get_currencies(date))
+
+#Get Currency exchange rates for today
+@app.route("/api/currencies/")
+@app.route("/api/currencies")
+def api_currenciesToday():
+    return jsonify(api_calls.get_currenciesToday())
+
+
+# Return the fetched weather json, day: <string:date>
+@app.route("/api/weather/<string:date>")
+def weather(date):
+    return jsonify(api_calls.get_weather(date))
+
+# Return the fetched weather json, day: today
+@app.route("/api/weather/today")
+def weather_today():
+    return jsonify(api_calls.get_weather_today())
 
 # Error handlers
 @app.errorhandler(404)
