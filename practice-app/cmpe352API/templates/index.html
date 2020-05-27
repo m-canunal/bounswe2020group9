@@ -4043,80 +4043,6 @@ html {
                 </div>
             </div>
 
-
-
-            <!-- Modal -->
-            <!--        Cool Stuff Modal    -->
-            <div class="modal fade" id="coolStuffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="coolStuffLabel">Get Exclusive Content</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <img class="img-fluid">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="modalFormWrapper">
-                                        <form>
-                                            <div class="form-group modalForm">
-                                                <label for="forName">What's your name?</label>
-                                                <input type="email" class="form-control" id="formName" placeholder="Name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="forEmail">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!--    Kickflip Modal   -->
-        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--    360 Flip Modal   -->
-        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-
-        <!--    Back Side Crook    -->
-        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-
         <!--Footer-->
         <footer class="footer bg-inverse footerBackGround">
             <div class="container-fluid">
@@ -4297,6 +4223,8 @@ html {
 
 
                 });
+
+                    // Add the Article related
                     var call = fetch(action = "/api/news/nasa/" + day)
                             .then(request => request.json())
                             .then(function(request) {
@@ -4327,7 +4255,13 @@ html {
                               .then(request=>request.json())
                               .then(function(request){
                                 console.log(request);
-                                var jsonkeys = Object.keys(request.locations);
+                                try{
+                                    var jsonkeys = Object.keys(request.locations);
+                                }
+                                catch (e) {
+                                    console.log(e);
+                                    return;
+                                }
                                 var location = jsonkeys[0];
                                 document.getElementById("weather_location").innerText = location;
                                 document.getElementById("weather_date").innerText = date;
