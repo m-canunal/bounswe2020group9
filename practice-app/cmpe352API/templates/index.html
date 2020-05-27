@@ -3829,305 +3829,312 @@ html {
 </head>
 
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">BAZAAR API CENTER</a>
-        </nav>
-        <div class="sectionLight" style="text-align: center">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Welcome to Bazaar API Center</h1>
-                            <p class="lead">APIs you need everyday.</p>
-                        </div>
+    <!-- Page -->
+        <div id="favorites_page">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div>
+                        <a class="navbar-brand" href="#">BAZAAR API CENTER</a>
+                        <button id = "favorites_button">FAVORITES</button>
                     </div>
-                </div>
-            </div>
-            <div class="row" style="text-align: center" >
-                <div class="col-sm-12">
-                        <label for="date">Enter a date:</label><br>
-                        <input type="text" id="date" name="date" placeholder="{{today}}"><br><br>
-                        <input type="submit" id="submit_button" name="submit_button" value="Submit">
-                </div>
-            </div>
-            
-        </div>
-        <!--   Section Two        -->
-
-
-
-        <!--   This part is for NASA API        -->
-
-        <div class="sectionDark">
-            <div class="row">
-                <div class="myImage">
-                    <img class="img-fluid" id ="apod_pic" src="https://apod.nasa.gov/apod/image/1902/EtaCarinae_HubbleSchmidt_960.jpg">
-                </div>
-                <div class="col-sm-12 col-md-6">
+                </nav>
+                <div class="sectionLight" style="text-align: center">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h1>NASA Astronomy Picture of the Day<br></h1>
-
-                            <h4 id="apod_title">"Doomed Star Eta Carinae"<br><br></h4>
-                            <a id="apod_link" href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">View HD </a>
-
-                            <h4>Copyright:</h4> 
-                            <p id="apod_copyright">"TomasHavel"</p>
-
-                            <h4>Date:</h4> 
-                            <p id="apod_date">2020-05-26</p>
-
-                            <h4>Explanation:</h4> 
-                            <p id="apod_explanation">Explanation Example</p>
-                            <h4>Article Corresponding to the Picture</h4>
-                            <h5 id="apod_news_title">News Title</h5>
-                            <p id="apod_news_body">News Body</p>
-                            <a id="apod_news_link" href="https://google.com">View Article</a>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-
-
-
-
-        <!--   This Part is for News API       -->
-
-        <div class="sectionDark">
-            
-            <div class="col-sm-12 col-md-12">
-                    <div id="mainCarousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
+                            <div class="jumbotron jumbotron-fluid">
+                                <div class="container">
+                                    <h1 class="display-4">Welcome to Bazaar API Center</h1>
+                                    <p class="lead">APIs you need everyday.</p>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" alt="...">
-                            </div>
                         </div>
-                        <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
-                </div>
-            
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="coolStuffWrapper">
-                        <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!--   This Part is for Weather API        -->
-        <div class="sectionDark">
-          <div class="row">
-              <div class="myImage">
-                  <img class="img-fluid" src="https://dv-website.s3.amazonaws.com/uploads/2019/05/jz_csweather_060619.jpg">
-              </div>
-              <div class="col-sm-12 col-md-6">
-                  <div class="row">
-                      <div class="col-sm-12">
-                          <h1>Weather<br></h1>
-
-                          <h4>Location:</h4> 
-                          <p id="weather_location">Istanbul,TR</p>
-
-                          <h4>Date:</h4> 
-                          <p id="weather_date">2020-05-25</p>
-                          <br>
-                          <h5>Weather:</h5> 
-                          <p id="weather_description">Partly cloudy</p>
-                          <h5>Highest temperature:</h5> 
-                          <p id="weather_high_temp">65℉</p>
-                          <h5>Lowest temperature:</h5> 
-                          <p id="weather_low_temp">57℉</p>
-                          <h5>Precipitation:</h5> 
-                          <p id="weather_precip">0%</p>
-                          <h5>Wind:</h5> 
-                          <p id="weather_wind">13 mph</p>
-
-                      </div>
-                  </div>
-              </div>
-              <div class="col"></div>
-          </div>
-      </div>
-        
-
-        <!--   This Part is for COVID-19 Tracking API        -->
-        <div class="sectionDark">
-            <div class="row">
-                <div class="col-sm-12 col-md-1 offset-md-2">
-                    <img class="img-fluid" >
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="row">
+                    <div class="row" style="text-align: center" >
                         <div class="col-sm-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <label for="date">Enter a date:</label><br>
+                                <input type="text" id="date" name="date" placeholder="{{today}}"><br><br>
+                                <input type="submit" id="submit_button" name="submit_button" value="Submit">
+                                <input type="submit" id="add_to_favorites" value="Add to Favorites">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-9">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="col-sm-12 col-md-3">
-                            <img class="img-fluid" >
-                        </div>
-                    </div>
+
                 </div>
-                <div class="col"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="coolStuffWrapper">
-                        <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <!--  This part is for Currency Rates API         -->
-        <div class="sectionDark">
-            <div class="row">
-                <div class="col-sm-12 col-md-1 offset-md-2">
-                    <img class="img-fluid">
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-9">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </div>
-                        <div class="col-sm-12 col-md-3">
-                            <img class="img-fluid" >
-                        </div>
-                    </div>
-                </div>
-                <div class="col"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="coolStuffWrapper">
-                        <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!--   Section Two        -->
 
 
-        
-        <!-- Modal -->
-        <!--        Cool Stuff Modal    -->
-        <div class="modal fade" id="coolStuffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="coolStuffLabel">Get Exclusive Content</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
+
+                <!--   This part is for NASA API        -->
+
+                <div class="sectionDark">
+                    <div class="row">
+                        <div class="myImage">
+                            <img class="img-fluid" id ="apod_pic" src="https://apod.nasa.gov/apod/image/1902/EtaCarinae_HubbleSchmidt_960.jpg">
+                        </div>
+                        <div class="col-sm-12 col-md-6">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <img class="img-fluid">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="modalFormWrapper">
-                                    <form>
-                                        <div class="form-group modalForm">
-                                            <label for="forName">What's your name?</label>
-                                            <input type="email" class="form-control" id="formName" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="forEmail">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
-                                    </form>
+                                    <h1>NASA Astronomy Picture of the Day<br></h1>
+
+                                    <h4 id="apod_title">"Doomed Star Eta Carinae"<br><br></h4>
+                                    <a id="apod_link" href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">View HD </a>
+
+                                    <h4>Copyright:</h4>
+                                    <p id="apod_copyright">"TomasHavel"</p>
+
+                                    <h4>Date:</h4>
+                                    <p id="apod_date">2020-05-26</p>
+
+                                    <h4>Explanation:</h4>
+                                    <p id="apod_explanation">Explanation Example</p>
+                                    <h4>Article Corresponding to the Picture</h4>
+                                    <h5 id="apod_news_title">News Title</h5>
+                                    <p id="apod_news_body">News Body</p>
+                                    <a id="apod_news_link" href="https://google.com">View Article</a>
+
                                 </div>
                             </div>
                         </div>
+                        <div class="col"></div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+
+
+
+                <!--   This Part is for News API       -->
+
+                <div class="sectionDark">
+
+                    <div class="col-sm-12 col-md-12">
+                            <div id="mainCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="coolStuffWrapper">
+                                <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--   This Part is for Weather API        -->
+                <div class="sectionDark">
+                  <div class="row">
+                      <div class="myImage">
+                          <img class="img-fluid" src="https://dv-website.s3.amazonaws.com/uploads/2019/05/jz_csweather_060619.jpg">
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <h1>Weather<br></h1>
+
+                                  <h4>Location:</h4>
+                                  <p id="weather_location">Istanbul,TR</p>
+
+                                  <h4>Date:</h4>
+                                  <p id="weather_date">2020-05-25</p>
+                                  <br>
+                                  <h5>Weather:</h5>
+                                  <p id="weather_description">Partly cloudy</p>
+                                  <h5>Highest temperature:</h5>
+                                  <p id="weather_high_temp">65℉</p>
+                                  <h5>Lowest temperature:</h5>
+                                  <p id="weather_low_temp">57℉</p>
+                                  <h5>Precipitation:</h5>
+                                  <p id="weather_precip">0%</p>
+                                  <h5>Wind:</h5>
+                                  <p id="weather_wind">13 mph</p>
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col"></div>
+                  </div>
+              </div>
+
+
+            <!--   This Part is for COVID-19 Tracking API        -->
+            <div class="sectionDark">
+                <div class="row">
+                    <div class="col-sm-12 col-md-1 offset-md-2">
+                        <img class="img-fluid" >
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <img class="img-fluid" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="coolStuffWrapper">
+                            <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--  This part is for Currency Rates API         -->
+            <div class="sectionDark">
+                <div class="row">
+                    <div class="col-sm-12 col-md-1 offset-md-2">
+                        <img class="img-fluid">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <img class="img-fluid" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="coolStuffWrapper">
+                            <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal" data-target="#coolStuffModal">Get Cool Stuff!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Modal -->
+            <!--        Cool Stuff Modal    -->
+            <div class="modal fade" id="coolStuffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="coolStuffLabel">Get Exclusive Content</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <img class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="modalFormWrapper">
+                                        <form>
+                                            <div class="form-group modalForm">
+                                                <label for="forName">What's your name?</label>
+                                                <input type="email" class="form-control" id="formName" placeholder="Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="forEmail">Password</label>
+                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <!--    Kickflip Modal   -->
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="embed-responsive embed-responsive-16by9">
+        <!--    Kickflip Modal   -->
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--    360 Flip Modal   -->
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
                     <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--    360 Flip Modal   -->
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!--    Back Side Crook    -->
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!--Footer-->
-    <footer class="footer bg-inverse footerBackGround">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 col-lg-3">
-                    <img class="img-fluid size footerImg" >
+        <!--    Back Side Crook    -->
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <iframe class="embed-responsive-item" src="//www.youtube.com/embed/G1IbRujko-A" allowfullscreen></iframe>
                 </div>
-                <div class="col-sm-12 col-lg-9 socialWrapper">
-                    <a href="https://github.com/bounswe/bounswe2020group9" target="_blank"> <i class="fa fa-github fa-3x" aria-hidden="true"></i></a>
-                    <a href="https://facebook.com" target="_blank"> <i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
-                    <a href="https://instagram.com" target="_blank"> <i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
-                    <a href="https://google.com" target="_blank"> <i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
-                </div>
-
             </div>
         </div>
-    </footer>
+
+        <!--Footer-->
+        <footer class="footer bg-inverse footerBackGround">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-3">
+                        <img class="img-fluid size footerImg" >
+                    </div>
+                    <div class="col-sm-12 col-lg-9 socialWrapper">
+                        <a href="https://github.com/bounswe/bounswe2020group9" target="_blank"> <i class="fa fa-github fa-3x" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com" target="_blank"> <i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                        <a href="https://instagram.com" target="_blank"> <i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
+                        <a href="https://google.com" target="_blank"> <i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -4135,7 +4142,36 @@ html {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+
 <script id="custom script">
+    var favorites_opened = false;
+    //favorites button click
+    document.getElementById("favorites_button").onclick = function(){
+        if (favorites_opened){
+            // alert("closing favorites");
+            document.body.removeChild(document.getElementById("fav_main"));
+            document.getElementById("favorites_page").style.marginRight="0";
+            favorites_opened = false;
+        }
+        else{
+            // alert("opening favorites");
+            document.getElementById("favorites_page").style.marginRight = "25%";
+            const fav_mainframe = document.createElement("div");
+            fav_mainframe.id = "fav_main";
+            const fav_title = document.createElement("h2");
+            fav_title.style.textAlign = "center";
+            fav_title.innerText = "Favorites"
+            const fav_list = document.createElement("ol")
+            fav_list.id ="favs";
+            append(fav_mainframe,fav_title);
+            append(fav_mainframe,fav_list);
+            append(document.body,fav_mainframe);
+            update_favorites();
+            favorites_opened = true;
+        }
+
+    }
+    //submit button click
     document.getElementById("submit_button").onclick = function () {
         var date = document.getElementById("date").value;
         if (date == ""){
@@ -4149,13 +4185,80 @@ html {
     document.getElementById("date").addEventListener("keyup", function (event){
         if(event.keyCode === 13) document.getElementById("submit_button").click();
     })
+
     window.onload = function (){
         var date = document.getElementById("date").value;
         if (date == "") date = document.getElementById("date").placeholder;
         update_apod(date);
         update_weather(date);
     }
-  
+
+        document.getElementById("add_to_favorites").onclick = function (){
+            var date = document.getElementById("date").value;
+            console.log(`add to favorites: \"${date}\"`);
+            var addFav = fetch(action="/api/favorites/add", {"method": "POST","body": date})
+                .then(update_favorites());
+        }
+  function update_favorites(){
+            const favs = document.getElementById("favs");
+            // Delete all old values
+            reset(favs);
+            // Fetch favorites
+            var favsAPI = fetch("api/favorites")
+                .then((response) => response.json())
+                .then(function (data) {
+                    let favorites = data;
+                    let i = 0;
+                    // If there are no favorites
+                    if (!favorites.length) {
+                        let text = document.createElement("p");
+                        text.innerText = "There are no Favorites";
+                        text.style.textAlign = "center";
+                        append(favs, text);
+                        return;
+                    }
+                    // Else (if there are favorites)
+                    return favorites.map(function (favorites) {
+                        let li = document.createElement("li"),
+                            span = document.createElement("span"),
+                            go_button = document.createElement("button"),
+                            delete_button = document.createElement("button");
+                        span.innerHTML = `${favorites} `;
+                        span.style.fontWeight = "bold";
+                        // "Go" button attributions
+                        go_button.innerHTML = "Go to Date";
+                        go_button.onclick = function(){
+                            // fill the input as the date
+                            document.getElementById("date").value = span.innerText;
+                            //click submit button
+                            document.getElementById("submit_button").click();
+                        }
+                        // "Delete" button attributions
+                        delete_button.innerHTML = "Delete";
+                        delete_button.onclick = function(){
+                            // delete that date from favorites
+                            var deleteFromFav = fetch("/api/favorites/remove", {method: "DELETE", body : favorites})
+                            .then(update_favorites())
+                        }
+                        append(li, span);
+                        append(li, go_button);
+                        append(li,delete_button)
+                        append(favs,li);
+                    })
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+
+        function append(parent, child){
+            return parent.appendChild(child);
+        }
+        function reset(parent){
+            while (parent.firstChild){
+                parent.removeChild(parent.lastChild);
+            }
+        }
     function update_apod(date) {
         var day = date;
         console.log(`(APOD request)
@@ -4197,14 +4300,25 @@ html {
                     var call = fetch(action = "/api/news/nasa/" + day)
                             .then(request => request.json())
                             .then(function(request) {
-                                // Update News title
+                                console.log(request);
                                 const news_title = document.getElementById("apod_news_title");
-                                news_title.innerText = request["title"];
+                                const news_link = document.getElementById("apod_news_link");
                                 const news_body = document.getElementById("apod_news_body");
+                                // Update News title
+                                news_title.innerText = request["title"];
+                                // Update News description
                                 news_body.innerText = request["description"];
                                 // Update News link
-                                const news_link = document.getElementById("apod_news_link");
                                 news_link.href = request["url"];
+                                // Error handling
+                                if ("No News" in request){
+                                    console.log(`(APOD request)
+    Alert: No news regarding date: \"${day}\"`)
+                                news_title.innerText = "*No Article found*";
+                                news_body.innerText = "Unfortunately today's Astronomy Picture of the Day didn't have any related news";
+                                news_link.href = "#";
+
+                                }
                             });
     }
 
