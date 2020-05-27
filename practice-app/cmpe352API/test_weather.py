@@ -3,7 +3,7 @@ import api_calls
 
 class SimpleTest(unittest.TestCase):
     def test_early_date_weather(self):
-        date = "2019-02-10"
+        date = "1900-02-10"
         response = api_calls.get_weather(date)
         self.assertEqual(response[0],"Please give a valid date.","Early date control failed")
 
