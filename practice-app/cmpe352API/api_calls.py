@@ -85,7 +85,13 @@ def get_news(date):
             return {"articles": ["Please give a valid date."]}
     else:
         return {"articles": ["Wrong input format"]}
-    return res["articles"][0:6]
+    res2 = []
+    i=0
+    while len(res2) !=6:
+        if res["articles"][i]["urlToImage"] != "null":
+            res2.append(res["articles"][i])
+        i+=1
+    return res2
     
 
 
