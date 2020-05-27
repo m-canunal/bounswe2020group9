@@ -15878,33 +15878,33 @@
 
                             <div id = "news0" class="carousel-item active"style="cursor: pointer;">
                                 <p> 1. Story </p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(0)" width = "500px" height = "250px">
-                                <p id = "newstitle0" onclick = "myfunction(0)" ></p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(0)" width = "500px" height = "250px">
+                                <p style="cursor: pointer ;" id = "newstitle0" onclick = "myfunction(0)" ></p>
                             </div>
                             <div id = "news1" class="carousel-item"style="cursor: pointer;">
                                 <p> 2. Story</p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(1)" width = "500px" height = "250px">
-                                <p id = "newstitle1"  onclick = "myfunction(1)" > </p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(1)" width = "500px" height = "250px">
+                                <p style="cursor: pointer ;" id = "newstitle1"  onclick = "myfunction(1)" > </p>
                             </div>
                             <div id = "news2" class="carousel-item"style="cursor: pointer;">
                                 <p> 3. Story</p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(2)" width = "500px" height = "250px">
-                                <p id = "newstitle2" onclick = "myfunction(2)" > </p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(2)" width = "500px" height = "250px">
+                                <p style="cursor: pointer ;" id = "newstitle2" onclick = "myfunction(2)" > </p>
                             </div>
                             <div id = "news3" class="carousel-item"style="cursor: pointer;">
                                 <p> 4. Story</p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(3)" width = "500px" height = "250px">                        <p ></p>
-                                <p id = "newstitle3" onclick = "myfunction(3)" > </p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(3)" width = "500px" height = "250px">                        <p ></p>
+                                <p style="cursor: pointer ;" id = "newstitle3" onclick = "myfunction(3)" > </p>
                             </div>
                             <div id = "news4" class="carousel-item"style="cursor: pointer;">
                                 <p> 5. Story</p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(4)" width = "500px" height = "250px">
-                                <p id = "newstitle4" onclick = "myfunction(4)" > </p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(4)" width = "500px" height = "250px">
+                                <p style="cursor: pointer ;" id = "newstitle4" onclick = "myfunction(4)" > </p>
                             </div>
                             <div id = "news5" class="carousel-item"style="cursor: pointer;">
                                 <p> 6. Story</p>
-                                <img class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(5)" width = "500px" height = "250px">
-                                <p id = "newstitle5" onclick = "myfunction(5)" > </p>
+                                <img style="cursor: pointer ;" class = "imageCarouseldef" src="" alt="..." onclick = "myfunction(5)" width = "500px" height = "250px">
+                                <p style="cursor: pointer ;" id = "newstitle5" onclick = "myfunction(5)" > </p>
                             </div>
 
                         </div>
@@ -16362,7 +16362,7 @@
             const confirmed = document.getElementById("confirmed");
             confirmed.innerText = turkeyData["Confirmed"];
             const covidDate = document.getElementById("covid_date");
-            covidDate.innerText = turkeyData["Date"];
+            covidDate.innerText = turkeyData["Date"].substring(0,10);
             const deaths = document.getElementById("deaths");
             deaths.innerText = turkeyData["Deaths"];
             const recovered = document.getElementById("recovered");

@@ -1,8 +1,10 @@
 # Library imports
-import requests, utils, geocoder
+import requests, utils , geocoder
 
 import covid
 import utils
+
+from datetime import datetime, timedelta
 
 # Custom files' imports
 from flask import jsonify
@@ -129,20 +131,44 @@ def get_currencies(date):  # example: "2020-05-19"
     return response.json()
 
 # alcan & hasan was here
+
+
+# get weather dates of a specific date
 def get_weather(date):
-    g = geocoder.ip('me')
-    location=g.latlng
-    url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+date+"T00:00:00&endDateTime="+date+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=BFX3T4LA3PYP8C1YSH44HMMSX"
-    return requests.get(url).json()
+    if utils.checkInputFormat(date):
+        if utils.checkDate(date) == "valid":
+            g = geocoder.ip('me')
+            location=g.latlng
+            url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+date+"T00:00:00&endDateTime="+date+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=7ITZ7NZ04VSIKZBKADNHGZ1UJ"
+            return requests.get(url).json()
+        else:
+            return {"articles": ["Please give a valid date."]}
+    else:
+        return {"articles": ["Wrong input format"]}
 
+
+# get weather dates of today
 def get_weather_today():
-    g = geocoder.ip('me')
-    location=g.latlng
-    today=utils.getTodayString()
-    url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+today+"T00:00:00&endDateTime="+today+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=BFX3T4LA3PYP8C1YSH44HMMSX"
-    return requests.get(url).json()
-
+    if utils.checkInputFormat(date):
+        if utils.checkDate(date) == "valid":
+            g = geocoder.ip('me')
+            location=g.latlng
+            today=utils.getTodayString()
+            url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+today+"T00:00:00&endDateTime="+today+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=7ITZ7NZ04VSIKZBKADNHGZ1UJ"
+            return requests.get(url).json()
+        else:
+            return {"articles": ["Please give a valid date."]}
+    else:
+        return {"articles": ["Wrong input format"]}
+        
     
 def get_covid(date):
-    return covid.getGlobalAndTurkeysDataByDate(date)
-
+    desiredDate=datetime.strptime(date, '%Y-%m-%d')
+    #print(desiredDate)
+    if desiredDate<datetime(2020,4,14):
+        desiredDate='2020-04-14'
+    elif desiredDate>=datetime.strptime(utils.getTodayString(),'%Y-%m-%d'):
+        desiredDate=(datetime.strptime(utils.getTodayString(), '%Y-%m-%d') - timedelta(days=2)).strftime('%Y-%m-%d')
+    else:
+        desiredDate=desiredDate.strftime('%Y-%m-%d')
+    return covid.getGlobalAndTurkeysDataByDate(desiredDate)
