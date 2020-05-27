@@ -15961,41 +15961,40 @@
       <!--   This Part is for COVID-19 Tracking API        -->
       <div class="sectionDark">
         <div class="row">
-          <div class="col-sm-12 col-md-1 offset-md-2">
-            <img class="img-fluid">
-          </div>
           <div class="col-sm-12 col-md-6">
             <div class="row">
               <div class="col-sm-12">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12 col-md-9">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.</p>
-              </div>
-              <div class="col-sm-12 col-md-3">
-                <img class="img-fluid">
+                <h1>Covid19<br></h1>
+                <h3>Date</h3>
+                <p id="covid_date">"0"<br><br></p>
+                <h3>Global</h3>
+                <h5>New Confirmed:</h5>
+                <p id="new_confirmed">"0"<br><br></p>
+                <h5>New Deaths:</h5>
+                <p id="new_deaths">"0"<br><br></p>
+                <h5>New Recovered:</h5>
+                <p id="new_recovered">"0"<br><br></p>
+                <h5>Total Confirmed:</h5>
+                <p id="total_confirmed">"0"<br><br></p>
+                <h5>Total Deaths:</h5>
+                <p id="total_deaths">"0"<br><br></p>
+                <h5>Total Recovered:</h5>
+                <p id="total_recovered">"0"<br><br></p>
+                <h3>Turkey</h3>
+                <h5>Active Cases:</h5>
+                <p id="active">"0"<br><br></p>
+                <h5>Confirmed:</h5>
+                <p id="confirmed">"0"<br><br></p>
+                <h5>Deaths:</h5>
+                <p id="deaths">"0"<br><br></p>
+                <h5>Recovered:</h5>
+                <p id="recovered">"0"<br><br></p>
+                
+
               </div>
             </div>
           </div>
           <div class="col"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="coolStuffWrapper">
-              <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal"
-                data-target="#coolStuffModal">Get Cool Stuff!</button>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -16143,6 +16142,7 @@
         else console.log(`Input submitted: \"${date}\"`);
         update_apod(date);
         update_weather(date);
+        update_covid(date);
         update_currencies (date);
         update_news(date);
       }
@@ -16155,6 +16155,7 @@
         if (date == "") date = document.getElementById("date").placeholder;
         update_apod(date);
         update_weather(date);
+        update_covid(date);
         update_currencies (date);
         update_news(date);
       }
@@ -16316,6 +16317,54 @@
           });
       }
 
+      function update_covid(date) {
+        var day = date;
+        console.log(`(covid request)
+    searching, date: \"${day}\"`);
+        var call = fetch(action = "/api/covid/" + day)
+          .then(request => request.json())
+          .then(function (request) {
+            if ("400, bad request" in request) {
+              console.log(`(covid request)
+    Error, can't find date: \"${day}\", aborting..`);
+              return;
+            }
+            console.log(request);
+
+            //global data
+            const globalData = request[0];
+            const newConfirmed = document.getElementById("new_confirmed");
+            newConfirmed.innerText = globalData["NewConfirmed"];
+            const newDeaths = document.getElementById("new_deaths");
+            newDeaths.innerText = globalData["NewDeaths"];
+            const newRecovered = document.getElementById("new_recovered");
+            newRecovered.innerText = globalData["NewRecovered"];
+            const totalConfirmed = document.getElementById("total_confirmed");
+            totalConfirmed.innerText = globalData["TotalConfirmed"];
+            const totalDeaths = document.getElementById("total_deaths");
+            totalDeaths.innerText = globalData["TotalDeaths"];
+            const totalRecovered = document.getElementById("total_recovered");
+            totalRecovered.innerText = globalData["TotalRecovered"];
+
+            //turkey data
+            const turkeyData =request[1];
+            const active = document.getElementById("active");
+            active.innerText = turkeyData["Active"];
+            const confirmed = document.getElementById("confirmed");
+            confirmed.innerText = turkeyData["Confirmed"];
+            const covidDate = document.getElementById("covid_date");
+            covidDate.innerText = turkeyData["Date"];
+            const deaths = document.getElementById("deaths");
+            deaths.innerText = turkeyData["Deaths"];
+            const recovered = document.getElementById("recovered");
+            recovered.innerText = turkeyData["Recovered"];
+
+
+
+           
+
+          });
+      }
       function update_currencies (date) {
 
             var call_currencies=fetch(action="api/currencies/" + date)
