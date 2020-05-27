@@ -72,22 +72,30 @@ def get_news(date):
     if utils.checkInputFormat(date):
         if utils.checkDate(date) == "valid":
             params = {
-                "q": "",
-                "country": "us",
-                "from": date,  # example: "2020-05-19"
-                "sortBy": "popularity",
+                "q": "tech",
+                "to": date,
+                "language": "en",
+                "sortBy": "publishedAt",
                 "apiKey": "64508aee042e414b93c1d5b047904c04"
             }
             response = requests.get(
-                "http://newsapi.org/v2/top-headlines?",
+                "http://newsapi.org/v2/everything?",
                 params=params
             )
             res = response.json()
+        elif utils.checkDate(date)== "date too early":
+            return ["Please give a valid date1."]
         else:
-            res = {"articles": ["Please give a valid date."]}
+            return  ["Please give a valid date2."]
     else:
-        res ={"articles": ["Wrong input format"]}
-    return res["articles"][0:6]
+        return ["Wrong input format"]
+    res2 = []
+    i=0
+    while len(res2) !=6:
+        if res["articles"][i]["urlToImage"] != None:
+            res2.append(res["articles"][i])
+        i+=1
+    return res2
     
 
 
