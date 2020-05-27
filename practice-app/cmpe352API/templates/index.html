@@ -15979,45 +15979,36 @@
 
 
       <!--  This part is for Currency Rates API         -->
-      <div class="sectionDark">
-        <div class="row">
-          <div class="col-sm-12 col-md-1 offset-md-2">
-            <img class="img-fluid">
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="row">
-              <div class="col-sm-12">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.</p>
+                <div class="sectionDark">
+                  <div class="row">
+                      <div class="myImage2">
+                          <img class="img-fluid" src="https://ps.w.org/artiss-currency-converter/assets/icon-256x256.png?rev=2146316">
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <h1>TRY Exchange Rates<br></h1>
+
+                                  <h4>Date:</h4>
+                                  <p id="currency_date">2020-05-25</p>
+                                  <br>
+                                  <h5>TRY-USD:</h5>
+                                  <p id="usd">SomeNumber</p>
+                                  <h5>TRY-EUR:</h5>
+                                  <p id="eur">SomeNumber</p>
+                                  <h5>TRY-CAD:</h5>
+                                  <p id="cad">SomeNumber</p>
+                                  <h5>TRY-GBP:</h5>
+                                  <p id="gbp">SomeNumber</p>
+
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col"></div>
+                  </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12 col-md-9">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.</p>
-              </div>
-              <div class="col-sm-12 col-md-3">
-                <img class="img-fluid">
-              </div>
-            </div>
-          </div>
-          <div class="col"></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="coolStuffWrapper">
-              <button type="button" class="btn btn-lg coolStuffBtn" data-toggle="modal"
-                data-target="#coolStuffModal">Get Cool Stuff!</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <!--Footer-->
       <footer class="footer bg-inverse footerBackGround">
@@ -16126,6 +16117,7 @@
         else console.log(`Input submitted: \"${date}\"`);
         update_apod(date);
         update_weather(date);
+        update_currencies (date);
       }
       document.getElementById("date").addEventListener("keyup", function (event) {
         if (event.keyCode === 13) document.getElementById("submit_button").click();
@@ -16136,6 +16128,7 @@
         if (date == "") date = document.getElementById("date").placeholder;
         update_apod(date);
         update_weather(date);
+        update_currencies (date);
       }
 
       document.getElementById("add_to_favorites").onclick = function () {
@@ -16294,6 +16287,21 @@
             document.getElementById("weather_wind").innerText = request.locations[location].values[0].wspd + " mph";
           });
       }
+
+      function update_currencies (date) {
+      var call_currencies=fetch(action="api/currencies/" + date)
+                          .then(request => request.json())
+                          .then(function(request){
+                          console.log(request);
+                          document.getElementById("currency_date").innerText = date;
+                          var rates = request["rates"];
+                          document.getElementById("usd").innerText = rates["USD"];
+                          document.getElementById("eur").innerText = rates["EUR"];
+                          document.getElementById("cad").innerText = rates["CAD"];
+                          document.getElementById("gbp").innerText = rates["GBP"];
+
+                        });
+  }
 
 
 
