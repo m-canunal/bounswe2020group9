@@ -1,5 +1,5 @@
 # Library imports
-from flask import jsonify, render_template
+from flask import jsonify
 
 # Custom files' imports
 import api_calls, utils
@@ -14,41 +14,30 @@ import api_calls, utils
 
 
 # Things that will be hold in  app.get_api()
-favorites = ["1999-06-21", "2012-09-20", "2017-07-26", "2002-01-17"]
+favorites = {0: ["first"], 1: ["second"], 2: ["third"], 3: ["fourth"], 4: ["fifth"], 5: ["sixth"]}
 
 
 # Get api depending on date
 def get_api(date):
-    api = {"favorites": favorites,
-        "news" : api_calls.get_news(date),
-        "apod" : api_calls.get_nasa_apod(date),
-        "nasa-news": api_calls.get_nasa_news(date)
-        # add more if necessary
-    }
+    api = {"favorites": favorites}
+    api["news"] = api_calls.get_news(date)
+    api["apod"] = api_calls.get_nasa_apod(date)
+    # add more if necessary
     return api
 
 
 # Functions to modify favorites
 def favorites_post(input):
-    if not input:
-        input = utils.getTodayString()
-    if input in favorites:
-        return{
-            "Duplicate error" : "Date \"" + input + "\" already Favorite"
-        }
-    else:
-        favorites.append(input)
+    favorites[utils.getFreeID(favorites)] = input
     return {"POST succesful": favorites}
 
 
 def favorites_delete(id):
     try:
-        favorites.remove(id)
-        return {"DELETE succesful": favorites}
-    except ValueError :
-        return {
-            "Error: Key not found": {"Possible solutions": [
-            "ALERT, THESE SOLUTIONS NEED REVIEW",
+        del favorites[id]
+    except KeyError:
+        return {"Error: Key not found": {"Possible solutions": [
             "Make sure you've typed the id as json such that `<json>[0] = id`",
             "Make sure the id you've entered is valid and available"
         ]}}
+    return {"DELETE succesful": favorites}
