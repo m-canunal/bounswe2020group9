@@ -3870,6 +3870,7 @@ html {
                             <h1>NASA Astronomy Picture of the Day<br></h1>
 
                             <h4 id="apod_title">"Doomed Star Eta Carinae"<br><br></h4>
+                            <a id="apod_link" href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">View HD </a>
 
                             <h4>Copyright:</h4> 
                             <p id="apod_copyright">"TomasHavel"</p>
@@ -3878,9 +3879,11 @@ html {
                             <p id="apod_date">2020-05-26</p>
 
                             <h4>Explanation:</h4> 
-                            <p id="apod_explanation">What’s higher than the Himalayas? Although the Himalayan Mountains are the tallest on planet Earth, they don't measure up to the Milky Way. Visible above the snow-capped mountains in the featured image is the arcing central band of our home galaxy.  The bright spot just above the central plane is the planet Jupiter, while the brightest orange spot on the upper right is the star Antares.  The astrophotographer braved below-zero temperatures at nearly 4,000-meters altitude to take the photographs that compose this image.  The featured picture is a composite of eight exposures taken with same camera and from the same location over three hours, just after sunset, in 2019 April, from near Bimtang Lake in Nepal.  Over much of planet Earth, the planets Mercury (faint) and Venus (bright) will be visible this week after sunset.   Experts Debate: How will humanity first discover extraterrestrial life?"</p>
-
-                            <a id="apod_link" href="https://apod.nasa.gov/apod/image/2005/MwMountains_Havel_960.jpg">View HD </a>
+                            <p id="apod_explanation">Explanation Example</p>
+                            <h4>Article Corresponding to the Picture</h4>
+                            <h5 id="apod_news_title">News Title</h5>
+                            <p id="apod_news_body">News Body</p>
+                            <a id="apod_news_link" href="https://google.com">View Article</a>
 
                         </div>
                     </div>
@@ -4187,7 +4190,22 @@ html {
                     link.href = ("hdurl" in request) ? request["hdurl"] : request["url"];
                     if (request["media_type"] == "video") link.innerText = "Watch video";
                     if (request["media_type"] == "image") link.innerText = "View HD";
+
+
+
                 });
+                    var call = fetch(action = "/api/news/nasa/" + day)
+                            .then(request => request.json())
+                            .then(function(request) {
+                                // Update News title
+                                const news_title = document.getElementById("apod_news_title");
+                                news_title.innerText = request["title"];
+                                const news_body = document.getElementById("apod_news_body");
+                                news_body.innerText = request["description"];
+                                // Update News link
+                                const news_link = document.getElementById("apod_news_link");
+                                news_link.href = request["url"];
+                            });
     }
 
         function update_weather (date) {
