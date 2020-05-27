@@ -15978,7 +15978,9 @@
 
 
 
-    <!--  This part is for Currency Rates API         -->
+
+      <!--  This part is for Currency Rates API         -->
+
                 <div class="sectionDark">
                   <div class="row">
                       <div class="myImage2">
@@ -16117,10 +16119,11 @@
         update_apod(date);
         update_weather(date);
         update_currencies (date);
-    }
-    document.getElementById("date").addEventListener("keyup", function (event){
-        if(event.keyCode === 13) document.getElementById("submit_button").click();
-    })
+
+      }
+      document.getElementById("date").addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) document.getElementById("submit_button").click();
+      })
 
     window.onload = function (){
         var date = document.getElementById("date").value;
@@ -16288,6 +16291,7 @@
       }
 
       function update_currencies (date) {
+
             var call_currencies=fetch(action="api/currencies/" + date)
                                 .then(request => request.json())
                                 .then(function(request){
