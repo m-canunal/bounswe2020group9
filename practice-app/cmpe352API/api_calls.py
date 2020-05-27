@@ -37,8 +37,10 @@ def get_nasa_apod(date):
 def get_nasa_news(date):
     if utils.checkInputFormat(date):
         if utils.checkDate(date) == "valid":
-            nasa = get_nasa_apod(date)
-            topics = get_topics(date)
+            try:
+                topics = get_topics(date)
+            except Exception:
+                return {"No News" : "No articles about the date specified."};
             annList = utils.sortByConfidence(topics["annotations"])
             x = 0
             i = 0
