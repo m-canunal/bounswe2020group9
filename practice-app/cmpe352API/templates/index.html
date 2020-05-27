@@ -16298,12 +16298,21 @@
         var call_weather = fetch(action = "api/weather/" + date)
           .then(request => request.json())
           .then(function (request) {
+            if ("400, bad request" in request) {
+              console.log(`(Weather request)
+    Error, can't find date: \"${day}\", aborting..`);
+              return;
+            }
             console.log(request);
             try {
               var jsonkeys = Object.keys(request.locations);
             }
             catch (e) {
               console.log("(Weather request) : \n\t" + e);
+              return;
+            }
+            if (request.locations[location].values[0].maxt == null) {
+              console.log("date invalid...aborted")
               return;
             }
             var location = jsonkeys[0];
