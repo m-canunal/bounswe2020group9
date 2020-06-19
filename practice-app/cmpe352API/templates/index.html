@@ -16308,6 +16308,7 @@
               return;
             }
             console.log(request);
+            
             try {
               var jsonkeys = Object.keys(request.locations);
             }
@@ -16315,11 +16316,13 @@
               console.log("(Weather request) : \n\t" + e);
               return;
             }
+            var location = jsonkeys[0];
+            console.log(location);
             if (request.locations[location].values[0].maxt == null) {
               console.log("date invalid...aborted")
               return;
             }
-            var location = jsonkeys[0];
+            
             document.getElementById("weather_location").innerText = location;
             document.getElementById("weather_date").innerText = date;
             document.getElementById("weather_description").innerText = request.locations[location].values[0].conditions;

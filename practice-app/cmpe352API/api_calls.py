@@ -139,7 +139,7 @@ def get_weather(date):
         if utils.checkDate(date) == "valid":
             g = geocoder.ip('me')
             location=g.latlng
-            url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+date+"T00:00:00&endDateTime="+date+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=7ITZ7NZ04VSIKZBKADNHGZ1UJ"
+            url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime="+date+"T00:00:00&endDateTime="+date+"T23:59:59&unitGroup=us&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location="+str(location[0])+","+str(location[1])+"&key=V52560MXD0ENFENU3K9IG14AM"
             return requests.get(url).json()
         else:
             return {"articles": ["Please give a valid date."]}
